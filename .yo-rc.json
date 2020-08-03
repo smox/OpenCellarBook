@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "org.sm0x.tools.opencellarbook",
+      "nativeLanguage": "de"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "monolith",
+    "baseName": "OpenCellarBook",
+    "packageName": "org.sm0x.tools.opencellarbook",
+    "packageFolder": "org/sm0x/tools/opencellarbook",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZGM1YTI0NzI4YjVkODkxOTg2ZTliODdiNjM2YTA4YjkzYWJmMzJmMzVmM2ZhYjVhMTAwM2NhMDY2YzRlY2E3NjRkMzgzMzM5Y2JjZmUwOWIxYzUzNDE0NmUyMzIxNTk1ODllMGI4OWM1OGE3ZjI1MjA0MTkxN2E5MzI2YjQzMmI=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "darkly",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1596445837908,
+    "testFrameworks": ["protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "de",
+    "languages": ["de", "en"],
+    "blueprints": []
+  }
+}
