@@ -1,0 +1,111 @@
+entity Container {
+	name String,
+    isAlwaysFull Boolean,
+    currentAmountOfContent Integer,
+    capacity Integer,
+    color String,
+    orderNumber Integer,
+    icon Blob,
+    deletedAt LocalDate
+}
+
+entity Location {
+	name String,
+    color String,
+    icon Blob,
+    orderNumber Integer,
+    deletedAt LocalDate
+}
+
+entity ContainerType {
+	name String,
+    deletedAt LocalDate,
+    color String,
+    orderNumber Integer,
+    icon Blob
+}
+
+entity MeasureType {
+	name String,
+    fillingEffect FillingEffect,
+    orderNumber Integer,
+    color String,
+    icon Blob,
+    deletedAt LocalDate
+}
+
+enum FillingEffect {
+	NO_EFFECT,
+    REFILL,
+    TRANSFILL,
+    BOTTLED
+}
+
+enum UiElement {
+	TEXT_FIELD,
+    INTEGER_SPINNER,
+    DECIMAL_SPINNER,
+    COMBO_BOX,
+    RANGE_SLIDER,
+    SEARCHABLE_COMBOBOX,
+    SINGLE_CHOICE_CHECKBOX,
+    MULTIBLE_CHOICE_CHECKBOX,
+    DATE_PICKER,
+    DATE_TIME_PICKER
+}
+
+entity MeasurePropertyType {
+	type String,
+    orderNumber Integer
+}
+
+entity MeasurePropertyValue {
+	value String
+}
+
+entity UiType {
+	name String,
+	element UiElement,
+    expression String
+}
+
+entity MeasureEntry {
+	realizedAt LocalDate,
+    createdAt LocalDate,
+    additionalInformation String,
+	deletedAt LocalDate
+}
+
+entity MeasurePropertyTypeGroup {
+	name String
+}
+
+entity MeasureTypeGroup {
+	name String
+}
+
+entity PossiblePTypesForMTypes {
+
+}
+
+relationship OneToMany {
+	Location to Container,
+    ContainerType to Container,
+    Container to MeasureEntry,
+    Container{currentMeasures} to MeasureEntry{currentContainer},
+    UiType to MeasurePropertyType,
+    MeasurePropertyType to MeasurePropertyValue,
+    MeasureType to MeasureEntry,
+    MeasureType to PossiblePTypesForMTypes,
+    MeasurePropertyType to PossiblePTypesForMTypes,
+    MeasureEntry to MeasurePropertyValue,
+    MeasureType{children} to MeasureType{parent},
+    MeasureEntry{children} to MeasureEntry{parent},
+    
+}
+
+relationship ManyToMany {
+	MeasurePropertyTypeGroup{MeasurePropertyType} to MeasurePropertyType{MeasurePropertyTypeGroup}
+    MeasureTypeGroup{MeasureType} to MeasureType{MeasureTypeGroup}
+}
+
