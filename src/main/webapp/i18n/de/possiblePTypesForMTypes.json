@@ -1,0 +1,23 @@
+{
+  "openCellarBookApp": {
+    "possiblePTypesForMTypes": {
+      "home": {
+        "title": "Possible P Types For M Types",
+        "createLabel": "Possible P Types For M Types erstellen",
+        "createOrEditLabel": "Possible P Types For M Types erstellen oder bearbeiten",
+        "notFound": "No Possible P Types For M Types found"
+      },
+      "created": "Possible P Types For M Types erstellt mit ID {{ param }}",
+      "updated": "Possible P Types For M Types aktualisiert mit ID {{ param }}",
+      "deleted": "Possible P Types For M Types gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Possible P Types For M Types {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Possible P Types For M Types"
+      },
+      "measureType": "Measure Type",
+      "measurePropertyType": "Measure Property Type"
+    }
+  }
+}

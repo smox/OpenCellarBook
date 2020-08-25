@@ -1,0 +1,31 @@
+{
+  "openCellarBookApp": {
+    "measureEntry": {
+      "home": {
+        "title": "Measure Entries",
+        "createLabel": "Measure Entry erstellen",
+        "createOrEditLabel": "Measure Entry erstellen oder bearbeiten",
+        "notFound": "No Measure Entries found"
+      },
+      "created": "Measure Entry erstellt mit ID {{ param }}",
+      "updated": "Measure Entry aktualisiert mit ID {{ param }}",
+      "deleted": "Measure Entry gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Measure Entry {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Measure Entry"
+      },
+      "realizedAt": "Realized At",
+      "createdAt": "Created At",
+      "additionalInformation": "Additional Information",
+      "deletedAt": "Deleted At",
+      "measurePropertyValue": "Measure Property Value",
+      "children": "Children",
+      "container": "Container",
+      "currentContainer": "Current Container",
+      "measureType": "Measure Type",
+      "parent": "Parent"
+    }
+  }
+}

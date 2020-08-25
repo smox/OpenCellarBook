@@ -7,6 +7,17 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "container": "Container",
+        "location": "Location",
+        "containerType": "Container Type",
+        "measureType": "Measure Type",
+        "measurePropertyType": "Measure Property Type",
+        "measurePropertyValue": "Measure Property Value",
+        "uiType": "Ui Type",
+        "measureEntry": "Measure Entry",
+        "measurePropertyTypeGroup": "Measure Property Type Group",
+        "measureTypeGroup": "Measure Type Group",
+        "possiblePTypesForMTypes": "Possible P Types For M Types",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

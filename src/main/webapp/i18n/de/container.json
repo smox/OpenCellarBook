@@ -1,0 +1,33 @@
+{
+  "openCellarBookApp": {
+    "container": {
+      "home": {
+        "title": "Containers",
+        "createLabel": "Container erstellen",
+        "createOrEditLabel": "Container erstellen oder bearbeiten",
+        "notFound": "No Containers found"
+      },
+      "created": "Container erstellt mit ID {{ param }}",
+      "updated": "Container aktualisiert mit ID {{ param }}",
+      "deleted": "Container gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Container {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Container"
+      },
+      "name": "Name",
+      "isAlwaysFull": "Is Always Full",
+      "currentAmountOfContent": "Current Amount Of Content",
+      "capacity": "Capacity",
+      "color": "Color",
+      "orderNumber": "Order Number",
+      "icon": "Icon",
+      "deletedAt": "Deleted At",
+      "measureEntry": "Measure Entry",
+      "currentMeasures": "Current Measures",
+      "location": "Location",
+      "containerType": "Container Type"
+    }
+  }
+}

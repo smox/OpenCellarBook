@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity MeasureEntry.
+    -->
+    <changeSet id="20200825123403-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="container_id"
+                                 baseTableName="measure_entry"
+                                 constraintName="fk_measure_entry_container_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="container"/>
+
+        <addForeignKeyConstraint baseColumnNames="current_container_id"
+                                 baseTableName="measure_entry"
+                                 constraintName="fk_measure_entry_current_container_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="container"/>
+
+        <addForeignKeyConstraint baseColumnNames="measure_type_id"
+                                 baseTableName="measure_entry"
+                                 constraintName="fk_measure_entry_measure_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="measure_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="measure_entry"
+                                 constraintName="fk_measure_entry_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="measure_entry"/>
+
+    </changeSet>
+</databaseChangeLog>

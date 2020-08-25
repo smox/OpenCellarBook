@@ -1,0 +1,30 @@
+{
+  "name": "MeasurePropertyTypeGroup",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "measurePropertyType",
+      "otherEntityRelationshipName": "measurePropertyTypeGroup",
+      "relationshipName": "measurePropertyType",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200825123503",
+  "entityTableName": "measure_property_type_group",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,25 @@
+{
+  "openCellarBookApp": {
+    "uiType": {
+      "home": {
+        "title": "Ui Types",
+        "createLabel": "Ui Type erstellen",
+        "createOrEditLabel": "Ui Type erstellen oder bearbeiten",
+        "notFound": "No Ui Types found"
+      },
+      "created": "Ui Type erstellt mit ID {{ param }}",
+      "updated": "Ui Type aktualisiert mit ID {{ param }}",
+      "deleted": "Ui Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Ui Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Ui Type"
+      },
+      "name": "Name",
+      "element": "Element",
+      "expression": "Expression",
+      "measurePropertyType": "Measure Property Type"
+    }
+  }
+}

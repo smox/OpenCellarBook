@@ -1,0 +1,45 @@
+{
+  "name": "ContainerType",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "container",
+      "otherEntityRelationshipName": "containerType",
+      "relationshipName": "container"
+    }
+  ],
+  "changelogDate": "20200825122903",
+  "entityTableName": "container_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "openCellarBookApp": {
+    "measurePropertyType": {
+      "home": {
+        "title": "Measure Property Types",
+        "createLabel": "Create a new Measure Property Type",
+        "createOrEditLabel": "Create or edit a Measure Property Type",
+        "notFound": "No Measure Property Types found"
+      },
+      "created": "A new Measure Property Type is created with identifier {{ param }}",
+      "updated": "A Measure Property Type is updated with identifier {{ param }}",
+      "deleted": "A Measure Property Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Measure Property Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Measure Property Type"
+      },
+      "type": "Type",
+      "orderNumber": "Order Number",
+      "measurePropertyValue": "Measure Property Value",
+      "possiblePTypesForMTypes": "Possible P Types For M Types",
+      "uiType": "Ui Type",
+      "measurePropertyTypeGroup": "Measure Property Type Group"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "name": "MeasureEntry",
+  "fields": [
+    {
+      "fieldName": "realizedAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "additionalInformation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measurePropertyValue",
+      "otherEntityRelationshipName": "measureEntry",
+      "relationshipName": "measurePropertyValue"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "children"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "container",
+      "otherEntityRelationshipName": "measureEntry",
+      "relationshipName": "container",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "container",
+      "otherEntityRelationshipName": "currentMeasures",
+      "relationshipName": "currentContainer",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measureType",
+      "otherEntityRelationshipName": "measureEntry",
+      "relationshipName": "measureType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "children",
+      "relationshipName": "parent",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200825123403",
+  "entityTableName": "measure_entry",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

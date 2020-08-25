@@ -1,0 +1,77 @@
+{
+  "name": "MeasureType",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fillingEffect",
+      "fieldType": "FillingEffect",
+      "fieldValues": "NO_EFFECT,REFILL,TRANSFILL,BOTTLED"
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "measureType",
+      "relationshipName": "measureEntry"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "possiblePTypesForMTypes",
+      "otherEntityRelationshipName": "measureType",
+      "relationshipName": "possiblePTypesForMTypes"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measureType",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "children"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measureType",
+      "otherEntityRelationshipName": "children",
+      "relationshipName": "parent",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "measureTypeGroup",
+      "otherEntityRelationshipName": "measureType",
+      "relationshipName": "measureTypeGroup",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200825123003",
+  "entityTableName": "measure_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

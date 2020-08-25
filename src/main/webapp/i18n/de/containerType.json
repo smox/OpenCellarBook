@@ -1,0 +1,27 @@
+{
+  "openCellarBookApp": {
+    "containerType": {
+      "home": {
+        "title": "Container Types",
+        "createLabel": "Container Type erstellen",
+        "createOrEditLabel": "Container Type erstellen oder bearbeiten",
+        "notFound": "No Container Types found"
+      },
+      "created": "Container Type erstellt mit ID {{ param }}",
+      "updated": "Container Type aktualisiert mit ID {{ param }}",
+      "deleted": "Container Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Container Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Container Type"
+      },
+      "name": "Name",
+      "deletedAt": "Deleted At",
+      "color": "Color",
+      "orderNumber": "Order Number",
+      "icon": "Icon",
+      "container": "Container"
+    }
+  }
+}

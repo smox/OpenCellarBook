@@ -1,0 +1,23 @@
+{
+  "openCellarBookApp": {
+    "measureTypeGroup": {
+      "home": {
+        "title": "Measure Type Groups",
+        "createLabel": "Measure Type Group erstellen",
+        "createOrEditLabel": "Measure Type Group erstellen oder bearbeiten",
+        "notFound": "No Measure Type Groups found"
+      },
+      "created": "Measure Type Group erstellt mit ID {{ param }}",
+      "updated": "Measure Type Group aktualisiert mit ID {{ param }}",
+      "deleted": "Measure Type Group gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Measure Type Group {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Measure Type Group"
+      },
+      "name": "Name",
+      "measureType": "Measure Type"
+    }
+  }
+}

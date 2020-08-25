@@ -1,0 +1,24 @@
+{
+  "openCellarBookApp": {
+    "measurePropertyValue": {
+      "home": {
+        "title": "Measure Property Values",
+        "createLabel": "Measure Property Value erstellen",
+        "createOrEditLabel": "Measure Property Value erstellen oder bearbeiten",
+        "notFound": "No Measure Property Values found"
+      },
+      "created": "Measure Property Value erstellt mit ID {{ param }}",
+      "updated": "Measure Property Value aktualisiert mit ID {{ param }}",
+      "deleted": "Measure Property Value gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Measure Property Value {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Measure Property Value"
+      },
+      "value": "Value",
+      "measurePropertyType": "Measure Property Type",
+      "measureEntry": "Measure Entry"
+    }
+  }
+}

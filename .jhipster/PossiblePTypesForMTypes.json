@@ -1,0 +1,31 @@
+{
+  "name": "PossiblePTypesForMTypes",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measureType",
+      "otherEntityRelationshipName": "possiblePTypesForMTypes",
+      "relationshipName": "measureType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measurePropertyType",
+      "otherEntityRelationshipName": "possiblePTypesForMTypes",
+      "relationshipName": "measurePropertyType",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200825123703",
+  "entityTableName": "possible_p_types_for_m_types",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

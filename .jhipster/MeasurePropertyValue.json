@@ -1,0 +1,36 @@
+{
+  "name": "MeasurePropertyValue",
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measurePropertyType",
+      "otherEntityRelationshipName": "measurePropertyValue",
+      "relationshipName": "measurePropertyType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "measurePropertyValue",
+      "relationshipName": "measureEntry",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200825123203",
+  "entityTableName": "measure_property_value",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

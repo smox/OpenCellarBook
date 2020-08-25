@@ -1,0 +1,37 @@
+{
+  "name": "UiType",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "element",
+      "fieldType": "UiElement",
+      "fieldValues": "TEXT_FIELD,INTEGER_SPINNER,DECIMAL_SPINNER,COMBO_BOX,RANGE_SLIDER,SEARCHABLE_COMBOBOX,SINGLE_CHOICE_CHECKBOX,MULTIBLE_CHOICE_CHECKBOX,DATE_PICKER,DATE_TIME_PICKER"
+    },
+    {
+      "fieldName": "expression",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measurePropertyType",
+      "otherEntityRelationshipName": "uiType",
+      "relationshipName": "measurePropertyType"
+    }
+  ],
+  "changelogDate": "20200825123303",
+  "entityTableName": "ui_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

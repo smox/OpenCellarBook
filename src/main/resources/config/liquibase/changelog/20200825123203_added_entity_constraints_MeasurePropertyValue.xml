@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity MeasurePropertyValue.
+    -->
+    <changeSet id="20200825123203-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="measure_property_type_id"
+                                 baseTableName="measure_property_value"
+                                 constraintName="fk_measure_property_value_measure_property_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="measure_property_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="measure_entry_id"
+                                 baseTableName="measure_property_value"
+                                 constraintName="fk_measure_property_value_measure_entry_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="measure_entry"/>
+
+    </changeSet>
+</databaseChangeLog>

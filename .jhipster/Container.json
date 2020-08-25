@@ -1,0 +1,77 @@
+{
+  "name": "Container",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isAlwaysFull",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "currentAmountOfContent",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "container",
+      "relationshipName": "measureEntry"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measureEntry",
+      "otherEntityRelationshipName": "currentContainer",
+      "relationshipName": "currentMeasures"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "container",
+      "relationshipName": "location",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "containerType",
+      "otherEntityRelationshipName": "container",
+      "relationshipName": "containerType",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200825122703",
+  "entityTableName": "container",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

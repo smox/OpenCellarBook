@@ -1,0 +1,32 @@
+{
+  "openCellarBookApp": {
+    "measureType": {
+      "home": {
+        "title": "Measure Types",
+        "createLabel": "Measure Type erstellen",
+        "createOrEditLabel": "Measure Type erstellen oder bearbeiten",
+        "notFound": "No Measure Types found"
+      },
+      "created": "Measure Type erstellt mit ID {{ param }}",
+      "updated": "Measure Type aktualisiert mit ID {{ param }}",
+      "deleted": "Measure Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Measure Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Measure Type"
+      },
+      "name": "Name",
+      "fillingEffect": "Filling Effect",
+      "orderNumber": "Order Number",
+      "color": "Color",
+      "icon": "Icon",
+      "deletedAt": "Deleted At",
+      "measureEntry": "Measure Entry",
+      "possiblePTypesForMTypes": "Possible P Types For M Types",
+      "children": "Children",
+      "parent": "Parent",
+      "measureTypeGroup": "Measure Type Group"
+    }
+  }
+}

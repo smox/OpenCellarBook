@@ -1,0 +1,53 @@
+{
+  "name": "MeasurePropertyType",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "measurePropertyValue",
+      "otherEntityRelationshipName": "measurePropertyType",
+      "relationshipName": "measurePropertyValue"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "possiblePTypesForMTypes",
+      "otherEntityRelationshipName": "measurePropertyType",
+      "relationshipName": "possiblePTypesForMTypes"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "uiType",
+      "otherEntityRelationshipName": "measurePropertyType",
+      "relationshipName": "uiType",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "measurePropertyTypeGroup",
+      "otherEntityRelationshipName": "measurePropertyType",
+      "relationshipName": "measurePropertyTypeGroup",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200825123103",
+  "entityTableName": "measure_property_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

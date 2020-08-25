@@ -48,6 +48,34 @@ public class CacheConfiguration {
             createCache(cm, org.sm0x.tools.opencellarbook.domain.User.class.getName());
             createCache(cm, org.sm0x.tools.opencellarbook.domain.Authority.class.getName());
             createCache(cm, org.sm0x.tools.opencellarbook.domain.User.class.getName() + ".authorities");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.Container.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.Container.class.getName() + ".measureEntries");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.Location.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.Location.class.getName() + ".containers");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.ContainerType.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.ContainerType.class.getName() + ".containers");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureType.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureType.class.getName() + ".measureEntries");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureType.class.getName() + ".possiblePTypesForMTypes");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureType.class.getName() + ".children");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureType.class.getName() + ".measureTypeGroups");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyType.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyType.class.getName() + ".measurePropertyValues");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyType.class.getName() + ".possiblePTypesForMTypes");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyType.class.getName() + ".measurePropertyTypeGroups");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyValue.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.UiType.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.UiType.class.getName() + ".measurePropertyTypes");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureEntry.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureEntry.class.getName() + ".measurePropertyValues");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureEntry.class.getName() + ".measureEntries");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyTypeGroup.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasurePropertyTypeGroup.class.getName() + ".measurePropertyTypes");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureTypeGroup.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureTypeGroup.class.getName() + ".measureTypes");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.PossiblePTypesForMTypes.class.getName());
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.Container.class.getName() + ".currentMeasures");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureEntry.class.getName() + ".children");
             // jhipster-needle-ehcache-add-entry
         };
     }
