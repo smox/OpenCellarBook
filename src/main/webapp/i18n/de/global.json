@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "OpenCellarBook",
+    "title": "Die freie Kellerbuch Software",
     "browsehappy": "Sie benutzen einen <strong>veralteten</strong> Browser. Bitte <a href=\"http://browsehappy.com/?locale=de/\">aktualisieren Sie Ihren Browser</a>, um die Benutzerfreundlichkeit zu erhöhen.",
     "menu": {
       "home": "Startseite",
@@ -59,9 +59,9 @@
     "messages": {
       "info": {
         "authenticated": {
-          "prefix": "Wenn Sie sich ",
+          "prefix": "Um losstarten zu können, müssen Sie sich nur noch ",
           "link": "anmelden",
-          "suffix": " möchten, versuchen Sie es mit <br/>- Administrator (Name=\"admin\" und Passwort=\"admin\")<br/>- Benutzer (Name=\"user\" und Passwort=\"user\")."
+          "suffix": "Ihre Zugangsdaten haben Sie bereits per E-Mail oder telefonisch erhalten."
         },
         "register": {
           "noaccount": "Sie haben noch keinen Zugang?",
@@ -146,5 +146,9 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Dies ist Ihre Fußzeile"
+  "misc": {
+    "email": "E-Mail",
+    "measures": "Maßnahmen"
+  },
+  "footer": "Diese Software ist lizensiert unter der GPLv3. Verwendung auf eigene Gefahr."
 }
