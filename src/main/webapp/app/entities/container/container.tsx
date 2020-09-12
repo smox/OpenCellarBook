@@ -7,8 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './container.reducer';
-import { IContainer } from 'app/shared/model/container.model';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export interface IContainerProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 

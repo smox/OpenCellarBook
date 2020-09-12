@@ -6,6 +6,7 @@ import authentication, { AuthenticationState } from './authentication';
 import applicationProfile, { ApplicationProfileState } from './application-profile';
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
+import manageContainer, { ManageContainerState } from 'app/modules/container/manage/manage.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
 import activate, { ActivateState } from 'app/modules/account/activate/activate.reducer';
@@ -56,10 +57,12 @@ import measureTypeGroup, {
 import possiblePTypesForMTypes, {
   PossiblePTypesForMTypesState
 } from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
+import manage from 'app/modules/container/manage/manage';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
   readonly authentication: AuthenticationState;
+  readonly manageContainers: ManageContainerState;
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
   readonly administration: AdministrationState;
@@ -86,6 +89,7 @@ export interface IRootState {
 
 const rootReducer = combineReducers<IRootState>({
   authentication,
+  manageContainers: manageContainer,
   locale,
   applicationProfile,
   administration,

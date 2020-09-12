@@ -5,6 +5,7 @@
     "menu": {
       "home": "Startseite",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+      "manage-containers": "Tanks verwalten",
       "entities": {
         "main": "Entitäten",
         "container": "Container",

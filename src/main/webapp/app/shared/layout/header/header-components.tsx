@@ -33,3 +33,14 @@ export const Home = props => (
     </NavLink>
   </NavItem>
 );
+
+export const ManageContainers = props => (
+  <NavItem>
+    <NavLink tag={Link} to="/manage-containers" className="d-flex align-items-center">
+      <FontAwesomeIcon icon="wine-glass" />
+      <span>
+        <Translate contentKey="global.menu.manage-containers">Manage Containers</Translate>
+      </span>
+    </NavLink>
+  </NavItem>
+);
