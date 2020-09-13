@@ -2,30 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
-import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
+import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
 import { getEntities as getMeasureEntries } from 'app/entities/measure-entry/measure-entry.reducer';
-import { IContainer } from 'app/shared/model/container.model';
 import { getEntities as getContainers } from 'app/entities/container/container.reducer';
-import { IMeasureType } from 'app/shared/model/measure-type.model';
 import { getEntities as getMeasureTypes } from 'app/entities/measure-type/measure-type.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './measure-entry.reducer';
-import { IMeasureEntry } from 'app/shared/model/measure-entry.model';
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 
 export interface IMeasureEntryUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const MeasureEntryUpdate = (props: IMeasureEntryUpdateProps) => {
-  const [childrenId, setChildrenId] = useState('0');
-  const [parentId, setParentId] = useState('0');
-  const [containerId, setContainerId] = useState('0');
-  const [currentContainerId, setCurrentContainerId] = useState('0');
-  const [measureTypeId, setMeasureTypeId] = useState('0');
-  const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
+  const [isNew ] = useState(!props.match.params || !props.match.params.id);
 
   const { measureEntryEntity, measureEntries, containers, measureTypes, loading, updating } = props;
 

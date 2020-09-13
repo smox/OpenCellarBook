@@ -5,10 +5,14 @@ import { IContainer } from 'app/shared/model/container.model';
 
 export const ACTION_TYPES = {
   FETCH_CONTAINER_LIST: 'manage-containers/FETCH_CONTAINER_LIST',
+  SHOW_ADD_MEASURE_MODAL: 'manage-containers/SHOW_ADD_MEASURE_MODAL',
+  HIDE_ADD_MEASURE_MODAL: 'manage-containers/HIDE_ADD_MEASURE_MODAL',
 };
 
 const initialState = {
   container: [] as ReadonlyArray<IContainer>,
+  showAddMeasureModal: false,
+  currentContainerId: 0,
   loading: false,
   errorMessage: null,
   loadSuccess: false,
@@ -44,6 +48,18 @@ export default (state: ManageContainerState = initialState, action): ManageConta
         loadFailure: true,
         errorMessage: action.payload,
       };
+    case ACTION_TYPES.SHOW_ADD_MEASURE_MODAL:
+      return {
+        ...state,
+        showAddMeasureModal: true,
+        currentContainerId: action.payload.containerId,
+      };
+    case ACTION_TYPES.HIDE_ADD_MEASURE_MODAL:
+      return {
+        ...state,
+        showAddMeasureModal: false,
+        currentContainerId: 0,
+      };
     default:
       return state;
   }
@@ -55,4 +71,14 @@ const apiUrl = 'api/containers';
 export const getEntities: ICrudGetAllAction<IContainer> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_CONTAINER_LIST,
   payload: axios.get<IContainer>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
+});
+
+export const setShowAddMeasureModal = (containerId: number) => ({
+  type: ACTION_TYPES.SHOW_ADD_MEASURE_MODAL,
+  payload: {
+    containerId,
+  },
+});
+export const setHideAddMeasureModal = () => ({
+  type: ACTION_TYPES.HIDE_ADD_MEASURE_MODAL,
 });

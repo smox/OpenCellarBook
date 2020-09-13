@@ -2,17 +2,20 @@ import './container.scss';
 
 import React from "react";
 import { IMeasureEntry } from 'app/shared/model/measure-entry.model';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export interface IContainerProps {
   containerName: string,
-  measures: IMeasureEntry[]
+  measures: IMeasureEntry[],
+  setShowAddMeasureModal
 }
 
-export const Container = ({ containerName, measures }: IContainerProps) => {
+export const Container = ({ containerName, measures, setShowAddMeasureModal } : IContainerProps) => {
 
   return (
-    <div className="container">
+  <>
+    <div className={ measures && measures.length > 0 ? "container container-full" : "container" }>
       <div className="container-content">
         <div className="container-content-header">
           <p className="container-content-header-title">{ containerName }</p>
@@ -33,12 +36,14 @@ export const Container = ({ containerName, measures }: IContainerProps) => {
           </ul>
         </div>
         <div className="container-content-footer">
-          <button className="container-content-footer-add-measure-button">+</button>
+          <button className="container-content-footer-add-measure-button btn btn-primary" onClick={ setShowAddMeasureModal }>
+            <FontAwesomeIcon className="container-content-footer-add-measure-button-sign" icon="plus" />
+          </button>
         </div>
       </div>
     </div>
+  </>
   );
-
 };
 
 export default Container;

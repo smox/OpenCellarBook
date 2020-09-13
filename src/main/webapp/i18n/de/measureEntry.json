@@ -1,6 +1,18 @@
 {
   "openCellarBookApp": {
     "measureEntry": {
+      "add": {
+        "additionalInformation": {
+          "placeholder": "Geben Sie hier bitte zusätzliche Informationen ein"
+        },
+        "createdAt": {
+          "errorMessage": "Das Datum an dem die Tätigkeit durchgeführt wurde muss angegeben werden!"
+        },
+        "button": {
+          "label": "Hinzufügen"
+        },
+        "title": "Eine neue Maßnahme für {{ param }} hinzufügen"
+      },
       "home": {
         "title": "Measure Entries",
         "createLabel": "Measure Entry erstellen",
@@ -16,15 +28,15 @@
       "detail": {
         "title": "Measure Entry"
       },
-      "realizedAt": "Realized At",
+      "realizedAt": "Erledigt am",
       "createdAt": "Created At",
-      "additionalInformation": "Additional Information",
+      "additionalInformation": "Zusätzliche Informationen",
       "deletedAt": "Deleted At",
       "measurePropertyValue": "Measure Property Value",
       "children": "Children",
       "container": "Container",
       "currentContainer": "Current Container",
-      "measureType": "Measure Type",
+      "measureType": "Maßnahmenart",
       "parent": "Parent"
     }
   }

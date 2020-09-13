@@ -39,7 +39,7 @@
         white-space: nowrap;
         overflow: hidden;
         width: 100%;
-        text-overflow: ellipsis;
+        text-oveflow: ellipsis;
       }
     }
 
@@ -47,11 +47,21 @@
       height: 15%;
 
       &-add-measure-button {
+        font-size: 2rem;
+        position: relative;
         float: right;
-        width: 35px;
-        height: 35px;
+        top: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
         border-radius: 100%;
         font-weight: bold;
+
+        &-sign {
+          position: relative;
+          top: -10px;
+          right: 7px;
+        }
       }
     }
   }

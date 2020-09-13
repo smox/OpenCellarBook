@@ -7,6 +7,7 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import manageContainer, { ManageContainerState } from 'app/modules/container/manage/manage.reducer';
+import addMeasureEntryModal, { AddMeasureEntryModalState } from 'app/modules/measure-entry/add-modal.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
 import activate, { ActivateState } from 'app/modules/account/activate/activate.reducer';
@@ -54,15 +55,15 @@ import measureTypeGroup, {
   MeasureTypeGroupState
 } from 'app/entities/measure-type-group/measure-type-group.reducer';
 // prettier-ignore
-import possiblePTypesForMTypes, {
-  PossiblePTypesForMTypesState
-} from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
-import manage from 'app/modules/container/manage/manage';
+import possiblePTypesForMTypes, { PossiblePTypesForMTypesState }
+  from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
+
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
   readonly authentication: AuthenticationState;
-  readonly manageContainers: ManageContainerState;
+  readonly manageContainer: ManageContainerState;
+  readonly addMeasureEntryModal: AddMeasureEntryModalState;
   readonly locale: LocaleState;
   readonly applicationProfile: ApplicationProfileState;
   readonly administration: AdministrationState;
@@ -89,7 +90,8 @@ export interface IRootState {
 
 const rootReducer = combineReducers<IRootState>({
   authentication,
-  manageContainers: manageContainer,
+  manageContainer,
+  addMeasureEntryModal,
   locale,
   applicationProfile,
   administration,
