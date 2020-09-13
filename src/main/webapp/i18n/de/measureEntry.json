@@ -34,8 +34,8 @@
       "deletedAt": "Deleted At",
       "measurePropertyValue": "Measure Property Value",
       "children": "Children",
-      "container": "Container",
-      "currentContainer": "Current Container",
+      "container": "Tank",
+      "currentContainer": "Aktueller Tank",
       "measureType": "Maßnahmenart",
       "parent": "Parent"
     }

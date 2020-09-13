@@ -21,9 +21,15 @@ export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
 
 class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
 
-  handleSubmit = (event, errors, { username, password, rememberMe }) => {
+  handleSubmit = (event, errors,
+                  {
+                    realizedAt,
+                    measureType,
+                    additionalInformation,
+                    container
+                  }) => {
     const { handleAddMeasure } = this.props;
-    handleAddMeasure(username, password, rememberMe);
+    handleAddMeasure(realizedAt, measureType, additionalInformation, container);
   };
 
   render() {
@@ -34,9 +40,9 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
     }
 
     const currentContainer =
-      this.props.containers.find(container => container.id == this.props.currentContainerId);
+      this.props.containers.find(c1 => c1.id === Number(this.props.currentContainerId));
 
-    const selectedMeasureType = measureTypes.find(mt => mt.id == this.props.selectedMeasureTypeId);
+    const selectedMeasureType = measureTypes.find(mt => mt.id === Number(this.props.selectedMeasureTypeId));
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="measures-add-page" autoFocus={false}>
@@ -60,7 +66,13 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                   <Label for="measure-entry-measureType">
                     <Translate contentKey="openCellarBookApp.measureEntry.measureType">Measure Type</Translate>
                   </Label>
-                  <AvInput onChange={ this.props.setSelectedMeasureTypeId } id="measure-entry-measureType" type="select" className="form-control" name="measureType.id">
+                  <AvInput onChange={ this.props.setSelectedMeasureTypeId }
+                            id="measure-entry-measureType"
+                            type="select"
+                            className="form-control"
+                            name="measureType.id"
+                            required>
+                    <option value="" key="0" />
                     {measureTypes ? measureTypes.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
                           {otherEntity.name}
@@ -81,7 +93,11 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                       <Label for="measure-entry-container">
                         <Translate contentKey="openCellarBookApp.measureEntry.container">Container</Translate>
                       </Label>
-                      <AvInput id="measure-entry-container" type="select" className="form-control" name="container.id">
+                      <AvInput id="measure-entry-container"
+                               type="select"
+                               className="form-control"
+                               name="container.id"
+                               required>
                         <option value="" key="0" />
                         { this.props.containers
                           ? this.props.containers.map(otherEntity => (
