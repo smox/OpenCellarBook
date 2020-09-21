@@ -15,9 +15,9 @@
 
 logging:
   level:
-    ROOT: DEBUG
-    io.github.jhipster: DEBUG
-    org.sm0x.tools.opencellarbook: DEBUG
+    ROOT: TRACE
+    io.github.jhipster: TRACE
+    org.sm0x.tools.opencellarbook: TRACE
 
 spring:
   profiles:

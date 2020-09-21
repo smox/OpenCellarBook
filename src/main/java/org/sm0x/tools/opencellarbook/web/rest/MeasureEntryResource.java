@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -65,10 +66,9 @@ public class MeasureEntryResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated measureEntry,
      * or with status {@code 400 (Bad Request)} if the measureEntry is not valid,
      * or with status {@code 500 (Internal Server Error)} if the measureEntry couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/measure-entries")
-    public ResponseEntity<MeasureEntry> updateMeasureEntry(@RequestBody MeasureEntry measureEntry) throws URISyntaxException {
+    public ResponseEntity<MeasureEntry> updateMeasureEntry(@RequestBody MeasureEntry measureEntry) {
         log.debug("REST request to update MeasureEntry : {}", measureEntry);
         if (measureEntry.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -76,6 +76,31 @@ public class MeasureEntryResource {
         MeasureEntry result = measureEntryRepository.save(measureEntry);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, measureEntry.getId().toString()))
+            .body(result);
+    }
+
+    @PutMapping("/measure-entries/list")
+    public ResponseEntity<List<MeasureEntry>> updateMeasureEntries(@RequestBody List<MeasureEntry> measureEntries) {
+        log.debug("REST request to update MeasureEntries : {}", measureEntries);
+        for(MeasureEntry measureEntry : measureEntries) {
+            if (measureEntry.getId() == null) {
+                throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+            }
+        }
+
+
+        List<MeasureEntry> result = measureEntryRepository.saveAll(measureEntries);
+        StringBuilder headerMessage = new StringBuilder();
+        for (int i = 0; i < result.size(); i++) {
+            MeasureEntry updatedMeasureEntry = result.get(i);
+            boolean isLastIteration = i+1 == result.size();
+            headerMessage.append(updatedMeasureEntry.getId());
+            if(!isLastIteration) {
+                headerMessage.append(",");
+            }
+        }
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, headerMessage.toString()))
             .body(result);
     }
 
@@ -89,6 +114,18 @@ public class MeasureEntryResource {
         log.debug("REST request to get all MeasureEntries");
         return measureEntryRepository.findAll();
     }
+
+    /**
+     * {@code GET  /measure-entries} : get all the measureEntries.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measureEntries in body.
+     */
+    @GetMapping("/measure-entries/all-active")
+    public List<MeasureEntry> getAllActiveMeasureEntries() {
+        log.debug("REST request to get all MeasureEntries which are currently in a container");
+        return measureEntryRepository.findByCurrentContainerIsNotNull();
+    }
+
 
     /**
      * {@code GET  /measure-entries/:id} : get the "id" measureEntry.

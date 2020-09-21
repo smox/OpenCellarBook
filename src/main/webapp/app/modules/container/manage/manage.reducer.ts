@@ -1,16 +1,29 @@
 import axios from 'axios';
-import { ICrudGetAllAction } from 'react-jhipster';
+import { ICrudGetAllAction, ICrudPutAction, IPayload } from 'react-jhipster';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { IContainer } from 'app/shared/model/container.model';
+import { IMeasureEntry } from 'app/shared/model/measure-entry.model';
+import {
+  createEntity as createMeasureEntry,
+  updateEntity as updateMeasureEntry,
+  updateEntities as updateMeasureEntries,
+} from 'app/entities/measure-entry/measure-entry.reducer';
 
 export const ACTION_TYPES = {
   FETCH_CONTAINER_LIST: 'manage-containers/FETCH_CONTAINER_LIST',
+  FETCH_ACTIVE_MEASURE_ENTRIES: 'manage-containers/FETCH_ACTIVE_MEASURE_ENTRIES',
+  ADD_MEASURE_ENTRY: 'manage-containers/ADD_MEASURE_ENTRY',
+  ADD_REFILL_MEASURE_ENTRY: 'manage-containers/ADD_REFILL_MEASURE_ENTRY',
+  ADD_TRANSFILL_MEASURE_ENTRY: 'manage-containers/ADD_TRANSFILL_MEASURE_ENTRY',
+  ADD_BOTTLED_MEASURE_ENTRY: 'manage-containers/ADD_BOTTLED_MEASURE_ENTRY',
+  TRANSFER_MEASURE_ENTRIES_TO_CONTAINER: 'TRANSFER_MEASURE_ENTRIES_TO_CONTAINER',
   SHOW_ADD_MEASURE_MODAL: 'manage-containers/SHOW_ADD_MEASURE_MODAL',
   HIDE_ADD_MEASURE_MODAL: 'manage-containers/HIDE_ADD_MEASURE_MODAL',
 };
 
 const initialState = {
   container: [] as ReadonlyArray<IContainer>,
+  measureEntries: [] as ReadonlyArray<IMeasureEntry>,
   showAddMeasureModal: false,
   currentContainerId: 0,
   loading: false,
@@ -48,6 +61,30 @@ export default (state: ManageContainerState = initialState, action): ManageConta
         loadFailure: true,
         errorMessage: action.payload,
       };
+    case REQUEST(ACTION_TYPES.FETCH_ACTIVE_MEASURE_ENTRIES):
+      return {
+        ...state,
+        errorMessage: null,
+        loading: true,
+        loadSuccess: false,
+        loadFailure: false,
+      };
+    case SUCCESS(ACTION_TYPES.FETCH_ACTIVE_MEASURE_ENTRIES):
+      return {
+        ...state,
+        measureEntries: action.payload.data,
+        loading: false,
+        loadSuccess: true,
+        loadFailure: false,
+      };
+    case FAILURE(ACTION_TYPES.FETCH_ACTIVE_MEASURE_ENTRIES):
+      return {
+        ...state,
+        loading: false,
+        loadSuccess: false,
+        loadFailure: true,
+        errorMessage: action.payload,
+      };
     case ACTION_TYPES.SHOW_ADD_MEASURE_MODAL:
       return {
         ...state,
@@ -66,11 +103,17 @@ export default (state: ManageContainerState = initialState, action): ManageConta
 };
 
 // Actions
-const apiUrl = 'api/containers';
+const apiContainers = 'api/containers';
+const apiMeasureEntries = 'api/measure-entries';
 
 export const getEntities: ICrudGetAllAction<IContainer> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_CONTAINER_LIST,
-  payload: axios.get<IContainer>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
+  payload: axios.get<IContainer>(`${apiContainers}?cacheBuster=${new Date().getTime()}`),
+});
+
+export const getActiveMeasureEntries: ICrudGetAllAction<IMeasureEntry> = () => ({
+  type: ACTION_TYPES.FETCH_ACTIVE_MEASURE_ENTRIES,
+  payload: axios.get<IMeasureEntry>(`${apiMeasureEntries}/all-active?cacheBuster=${new Date().getTime()}`),
 });
 
 export const setShowAddMeasureModal = (containerId: number) => ({
@@ -79,6 +122,7 @@ export const setShowAddMeasureModal = (containerId: number) => ({
     containerId,
   },
 });
+
 export const setHideAddMeasureModal = () => ({
   type: ACTION_TYPES.HIDE_ADD_MEASURE_MODAL,
 });

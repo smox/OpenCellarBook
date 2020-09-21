@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
@@ -11,6 +11,7 @@ export const ACTION_TYPES = {
   FETCH_MEASUREENTRY: 'measureEntry/FETCH_MEASUREENTRY',
   CREATE_MEASUREENTRY: 'measureEntry/CREATE_MEASUREENTRY',
   UPDATE_MEASUREENTRY: 'measureEntry/UPDATE_MEASUREENTRY',
+  UPDATE_MEASURE_ENTRIES: 'measureEntry/UPDATE_MEASURE_ENTRIES',
   DELETE_MEASUREENTRY: 'measureEntry/DELETE_MEASUREENTRY',
   RESET: 'measureEntry/RESET',
 };
@@ -40,6 +41,7 @@ export default (state: MeasureEntryState = initialState, action): MeasureEntrySt
       };
     case REQUEST(ACTION_TYPES.CREATE_MEASUREENTRY):
     case REQUEST(ACTION_TYPES.UPDATE_MEASUREENTRY):
+    case REQUEST(ACTION_TYPES.UPDATE_MEASURE_ENTRIES):
     case REQUEST(ACTION_TYPES.DELETE_MEASUREENTRY):
       return {
         ...state,
@@ -51,6 +53,7 @@ export default (state: MeasureEntryState = initialState, action): MeasureEntrySt
     case FAILURE(ACTION_TYPES.FETCH_MEASUREENTRY):
     case FAILURE(ACTION_TYPES.CREATE_MEASUREENTRY):
     case FAILURE(ACTION_TYPES.UPDATE_MEASUREENTRY):
+    case FAILURE(ACTION_TYPES.UPDATE_MEASURE_ENTRIES):
     case FAILURE(ACTION_TYPES.DELETE_MEASUREENTRY):
       return {
         ...state,
@@ -60,6 +63,7 @@ export default (state: MeasureEntryState = initialState, action): MeasureEntrySt
         errorMessage: action.payload,
       };
     case SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST):
+    case SUCCESS(ACTION_TYPES.UPDATE_MEASURE_ENTRIES):
       return {
         ...state,
         loading: false,
@@ -98,7 +102,6 @@ export default (state: MeasureEntryState = initialState, action): MeasureEntrySt
 const apiUrl = 'api/measure-entries';
 
 // Actions
-
 export const getEntities: ICrudGetAllAction<IMeasureEntry> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_MEASUREENTRY_LIST,
   payload: axios.get<IMeasureEntry>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
@@ -125,6 +128,15 @@ export const updateEntity: ICrudPutAction<IMeasureEntry> = entity => async dispa
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_MEASUREENTRY,
     payload: axios.put(apiUrl, cleanEntity(entity)),
+  });
+  return result;
+};
+
+export const updateEntities: ICrudPutAction<IMeasureEntry[]> = entities => async dispatch => {
+  entities.forEach(entity => cleanEntity(entity));
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_MEASURE_ENTRIES,
+    payload: axios.put(apiUrl + '/list', entities),
   });
   return result;
 };

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Translate, translate} from 'react-jhipster';
 import {Button, Col, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row} from 'reactstrap';
 import {AvField, AvForm, AvGroup, AvInput} from 'availity-reactstrap-validation';
@@ -6,9 +6,8 @@ import {IMeasureType} from "app/shared/model/measure-type.model";
 import {IRootState} from "app/shared/reducers";
 import {connect} from "react-redux";
 import {setSelectedMeasureTypeId} from "app/modules/measure-entry/add-modal.reducer";
-import { FillingEffect } from "app/shared/model/enumerations/filling-effect.model";
-import { IContainer } from "app/shared/model/container.model";
-import container from "app/entities/container/container";
+import {FillingEffect} from "app/shared/model/enumerations/filling-effect.model";
+import {IContainer} from "app/shared/model/container.model";
 
 export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
   showModal: boolean;
@@ -23,20 +22,22 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
 
   handleSubmit = (event, errors,
                   {
-                    realizedAt,
-                    measureType,
-                    additionalInformation,
-                    container
+                    formRealizedAt,
+                    formMeasureType,
+                    formAdditionalInformation,
+                    formContainer,
+                    formCurrentContainerId
                   }) => {
     const { handleAddMeasure } = this.props;
-    handleAddMeasure(realizedAt, measureType, additionalInformation, container);
+    handleAddMeasure(formRealizedAt, formMeasureType, formAdditionalInformation, formContainer, formCurrentContainerId);
   };
 
   render() {
     const { handleClose, measureTypes } = this.props;
 
     const defaultValues = {
-      realizedAt: new Date()
+      formRealizedAt: new Date(),
+      formCurrentContainerId: this.props.currentContainerId
     }
 
     const currentContainer =
@@ -58,7 +59,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                     <Translate contentKey="openCellarBookApp.measureEntry.realizedAt">Realized At</Translate>
                   </Label>
                   <AvField id="measure-entry-realizedAt" type="date" className="form-control"
-                           name="realizedAt"
+                           name="formRealizedAt"
                            errorMessage={translate('openCellarBookApp.measureEntry.add.createdAt.errorMessage')}
                            required />
                 </AvGroup>
@@ -70,19 +71,30 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                             id="measure-entry-measureType"
                             type="select"
                             className="form-control"
-                            name="measureType.id"
+                            name="formMeasureType.id"
                             required>
                     <option value="" key="0" />
-                    {measureTypes ? measureTypes.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.name}
-                        </option>
-                      ))
-                      : null}
+                    {
+                      currentContainer && currentContainer.currentMeasures && currentContainer.currentMeasures.length > 0 ? (
+                        measureTypes ? measureTypes.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.name}
+                          </option>
+                        )) : null ) : (
+                        measureTypes && measureTypes.length > 0 ?
+                          measureTypes
+                            .filter(mt => mt.fillingEffect === FillingEffect.REFILL)
+                            .map(otherEntity => (
+                              <option value={otherEntity.id} key={otherEntity.id}>
+                                {otherEntity.name}
+                              </option>
+                            )) : null
+                        )
+                    }
                   </AvInput>
                 </AvGroup>
                 <AvField
-                  name="additionalInformation"
+                  name="formAdditionalInformation"
                   label={translate('openCellarBookApp.measureEntry.additionalInformation')}
                   placeholder={translate('openCellarBookApp.measureEntry.add.additionalInformation.placeholder')}
                 />
@@ -96,11 +108,13 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                       <AvInput id="measure-entry-container"
                                type="select"
                                className="form-control"
-                               name="container.id"
+                               name="formContainer.id"
                                required>
                         <option value="" key="0" />
-                        { this.props.containers
-                          ? this.props.containers.map(otherEntity => (
+                        { this.props.containers && this.props.containers.length > 0 ?
+                          this.props.containers
+                            .filter(c => !c.currentMeasures || c.currentMeasures.length === 0)
+                            .map(otherEntity => (
                             <option value={otherEntity.id} key={otherEntity.id}>
                               {otherEntity.name}
                             </option>
@@ -110,6 +124,10 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                     </AvGroup>
                   ) : null
                 }
+                <AvField
+                  name="formCurrentContainerId"
+                  hidden={true}
+                />
               </Col>
             </Row>
           </ModalBody>

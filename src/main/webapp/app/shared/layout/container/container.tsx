@@ -22,16 +22,31 @@ export const Container = ({ containerName, measures, setShowAddMeasureModal } : 
         </div>
         <div className="container-content-body">
           <ul className="container-content-body-measure-list">
-            { measures.map((measure, index) => {
+            { measures ? measures
+              .sort((a, b) => {
+                if(a.realizedAt) {
+                  if(a.realizedAt === b.realizedAt) {
+                    return String(a.id).localeCompare(String(b.id));
+                  } else {
+                    return a.realizedAt.localeCompare(b.realizedAt);
+                  }
+                }
+                return String(a.id).localeCompare(String(b.id));
+              })
+              .map((measure, index) => {
                 let measureName:string = measure.measureType ? measure.measureType.name : String(measure.id);
                 measure.additionalInformation ? measureName += " ("+measure.additionalInformation+")" : "";
 
-                if(measures.length > 10 && index === 5) {
+                if(measures.length > 8 && index === 2) {
                   return <li>...</li>
                 }
 
+                if(measures.length > 8 && index > 3 && index < measures.length - 5) {
+                  return null;
+                }
+
                 return <li key={measure.id} title={measureName}>{measureName}</li>;
-              })
+              }) : null
             }
           </ul>
         </div>

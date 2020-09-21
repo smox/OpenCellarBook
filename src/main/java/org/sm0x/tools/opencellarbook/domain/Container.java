@@ -55,11 +55,9 @@ public class Container implements Serializable {
     private LocalDate deletedAt;
 
     @OneToMany(mappedBy = "container")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<MeasureEntry> measureEntries = new HashSet<>();
 
     @OneToMany(mappedBy = "currentContainer")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<MeasureEntry> currentMeasures = new HashSet<>();
 
     @ManyToOne
