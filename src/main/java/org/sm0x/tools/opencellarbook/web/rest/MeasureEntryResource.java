@@ -120,8 +120,8 @@ public class MeasureEntryResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measureEntries in body.
      */
-    @GetMapping("/measure-entries/all-active")
-    public List<MeasureEntry> getAllActiveMeasureEntries() {
+    @GetMapping("/measure-entries/with-current-container")
+    public List<MeasureEntry> getMeasureEntriesWithCurrentContainer() {
         log.debug("REST request to get all MeasureEntries which are currently in a container");
         return measureEntryRepository.findByCurrentContainerIsNotNull();
     }

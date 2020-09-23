@@ -87,9 +87,7 @@ public class ContainerResource {
     @GetMapping("/containers")
     public List<Container> getAllContainers() {
         log.debug("REST request to get all Containers");
-        List<Container> containers = containerRepository.findAll();
-        containers.forEach(container -> container.getCurrentMeasures().forEach(measureEntry -> measureEntry.setContainer(null)));
-        return containers;
+        return containerRepository.findAll();
     }
 
     /**

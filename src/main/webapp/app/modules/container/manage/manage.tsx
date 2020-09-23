@@ -5,12 +5,14 @@ import {Translate} from "react-jhipster";
 import {
   getEntities,
   setHideAddMeasureModal,
-  setShowAddMeasureModal
+  setShowAddMeasureModal,
+  getMeasureEntriesWithCurrentContainer
 } from "app/modules/container/manage/manage.reducer";
 import {getEntities as getMeasureTypes} from 'app/entities/measure-type/measure-type.reducer';
 import {
   createEntity as createMeasureEntry,
-  updateEntities as updateMeasureEntries
+  updateEntities as updateMeasureEntries,
+  getEntities as getMeasureEntries
 } from 'app/entities/measure-entry/measure-entry.reducer';
 import './manage.scss';
 import Container from "app/shared/layout/container/container";
@@ -27,10 +29,18 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
   useEffect(() => {
     props.getEntities();
     props.getMeasureTypes();
+    props.getMeasureEntries();
   }, []);
 
   useEffect(() => {
-    props.getEntities();
+    props.containers.forEach(c => c.currentMeasures = []);
+    props.measureEntries.filter(me => me.currentContainer).forEach(me => {
+      const container = props.containers.find(c => c.id === me.currentContainer.id);
+      if(container) {
+        container.currentMeasures.push(me)
+      }
+    })
+
   }, [props.measureEntries])
 
 
@@ -50,7 +60,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
         realizedAt,
         measureType,
         additionalInformation,
-        container: currentContainer, // TODO: WARUM WIRD DAS NICHT GESETZT???
+        container: currentContainer,
         currentContainer,
         parent
       });
@@ -141,6 +151,7 @@ const mapStateToProps = ({ authentication, manageContainer, measureType, measure
   containers: manageContainer.container,
   measureTypes: measureType.entities,
   measureEntries: measureEntry.entities,
+  measureEntriesWithCurrentContainer: manageContainer.measureEntriesWithCurrentContainer,
   currentContainerId: manageContainer.currentContainerId,
   showAddMeasureModal: manageContainer.showAddMeasureModal,
   loading: manageContainer.loading,
@@ -149,7 +160,7 @@ const mapStateToProps = ({ authentication, manageContainer, measureType, measure
 });
 
 const mapDispatchToProps = { getEntities, updateMeasureEntries, setShowAddMeasureModal, setHideAddMeasureModal,
-  getMeasureTypes, createMeasureEntry };
+  getMeasureTypes, createMeasureEntry, getMeasureEntriesWithCurrentContainer, getMeasureEntries };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
