@@ -42,7 +42,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
     const { handleClose, measureTypes } = this.props;
 
     const defaultValues = {
-      formRealizedAt: new Date(),
+      formRealizedAt: new Date().toISOString().substr(0,10),
       formCurrentContainerId: this.props.currentContainerId
     }
 
@@ -64,7 +64,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                   <Label id="realizedAtLabel" for="measure-entry-realizedAt">
                     <Translate contentKey="openCellarBookApp.measureEntry.realizedAt">Realized At</Translate>
                   </Label>
-                  <AvField id="measure-entry-realizedAt" type="date" className="form-control"
+                  <AvField id="measure-entry-realizedAt"  type="date" className="form-control"
                            name="formRealizedAt"
                            errorMessage={translate('openCellarBookApp.measureEntry.add.createdAt.errorMessage')}
                            required />
