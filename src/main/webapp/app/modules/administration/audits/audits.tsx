@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { Input, Row, Table } from 'reactstrap';
-import { Translate, TextFormat, JhiPagination, JhiItemCount, getSortState, IPaginationBaseState } from 'react-jhipster';
+import { Translate, TextFormat, JhiPagination, JhiItemCount, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_TIMESTAMP_FORMAT } from 'app/config/constants';

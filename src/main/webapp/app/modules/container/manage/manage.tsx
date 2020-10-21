@@ -4,16 +4,13 @@ import {connect} from "react-redux";
 import {Translate} from "react-jhipster";
 import {
   getEntities,
-  setHideAddMeasureModal,
-  setShowAddMeasureModal,
-  getMeasureEntriesWithCurrentContainer
+  hideAddMeasureModal,
+  showAddMeasureModal,
+  createMeasureEntry,
+  createMeasureEntryOnly,
+  updateMeasureEntries
 } from "app/modules/container/manage/manage.reducer";
-import {getEntities as getMeasureTypes} from 'app/entities/measure-type/measure-type.reducer';
-import {
-  createEntity as createMeasureEntry,
-  updateEntities as updateMeasureEntries,
-  getEntities as getMeasureEntries
-} from 'app/entities/measure-entry/measure-entry.reducer';
+import { getEntities as getMeasureTypes } from 'app/entities/measure-type/measure-type.reducer';
 import './manage.scss';
 import Container from "app/shared/layout/container/container";
 import AddMeasureModal from "app/modules/measure-entry/add-modal";
@@ -29,20 +26,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
   useEffect(() => {
     props.getEntities();
     props.getMeasureTypes();
-    props.getMeasureEntries();
   }, []);
-
-  useEffect(() => {
-    props.containers.forEach(c => c.currentMeasures = []);
-    props.measureEntries.filter(me => me.currentContainer).forEach(me => {
-      const container = props.containers.find(c => c.id === me.currentContainer.id);
-      if(container) {
-        container.currentMeasures.push(me)
-      }
-    })
-
-  }, [props.measureEntries])
-
 
   function addMeasureEntry(realizedAt: string, measureType: IMeasureType,
                            additionalInformation: string, container: IContainer, currentContainerId: number) {
@@ -69,7 +53,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
 
       const newContainer = props.containers.find(c => c.id === Number(container.id));
 
-      props.createMeasureEntry({
+      props.createMeasureEntryOnly({
         createdAt: toDateString(new Date()),
         realizedAt,
         measureType,
@@ -87,7 +71,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
 
     } else if (measureType.fillingEffect === FillingEffect.BOTTLED) {
 
-      props.createMeasureEntry({
+      props.createMeasureEntryOnly({
         createdAt: toDateString(new Date()),
         realizedAt,
         measureType,
@@ -115,8 +99,6 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
         parent
       });
     }
-
-    props.setHideAddMeasureModal();
   }
 
   return (
@@ -159,8 +141,8 @@ const mapStateToProps = ({ authentication, manageContainer, measureType, measure
   isAuthenticated: authentication.isAuthenticated,
 });
 
-const mapDispatchToProps = { getEntities, updateMeasureEntries, setShowAddMeasureModal, setHideAddMeasureModal,
-  getMeasureTypes, createMeasureEntry, getMeasureEntriesWithCurrentContainer, getMeasureEntries };
+const mapDispatchToProps = { getEntities, createMeasureEntry, updateMeasureEntries, createMeasureEntryOnly,
+  setShowAddMeasureModal: showAddMeasureModal, setHideAddMeasureModal: hideAddMeasureModal, getMeasureTypes };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

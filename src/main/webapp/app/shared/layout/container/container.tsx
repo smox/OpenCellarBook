@@ -38,7 +38,7 @@ export const Container = ({ containerName, measures, setShowAddMeasureModal } : 
                 measure.additionalInformation ? measureName += " ("+measure.additionalInformation+")" : "";
 
                 if(measures.length > 8 && index === 2) {
-                  return <li>...</li>
+                  return <li key={"0"}>...</li>
                 }
 
                 if(measures.length > 8 && index > 3 && index < measures.length - 5) {

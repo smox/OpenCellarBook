@@ -24,12 +24,15 @@ import { faAsterisk } from '@fortawesome/free-solid-svg-icons/faAsterisk';
 import { faFlag } from '@fortawesome/free-solid-svg-icons/faFlag';
 import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faWineBottle } from '@fortawesome/free-solid-svg-icons/faWineBottle';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faWineGlass } from '@fortawesome/free-solid-svg-icons/faWineGlass';
+import { faWineGlassAlt } from '@fortawesome/free-solid-svg-icons/faWineGlassAlt';
 
 export const loadIcons = () => {
   library.add(
@@ -62,6 +65,9 @@ export const loadIcons = () => {
     faRoad,
     faCloud,
     faTimesCircle,
-    faSearch
+    faSearch,
+    faWineBottle,
+    faWineGlass,
+    faWineGlassAlt
   );
 };

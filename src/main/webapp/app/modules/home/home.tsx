@@ -20,9 +20,6 @@ export const Home = (props: IHomeProp) => {
         <h2>
           <Translate contentKey="home.title">Welcome!</Translate>
         </h2>
-        <p className="lead">
-          <Translate contentKey="home.subtitle">This is your homepage</Translate>
-        </p>
         {account && account.login ? (
           <div>
             <Alert color="success">
@@ -30,7 +27,7 @@ export const Home = (props: IHomeProp) => {
                 You are logged in as user {account.login}.<br/>
               </Translate><br/>
               <Translate contentKey={"home.logged.add.measure"}/>
-              <Link to={"/manage-containers"}><Translate contentKey={"misc.measures"}>Maßnahmen</Translate></Link>
+              <Link to={"/manage-containers"}><Translate contentKey={"global.menu.manage-containers"}>Manage Containers</Translate></Link>
             </Alert>
           </div>
         ) : (
