@@ -20,17 +20,23 @@ export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
 
 class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
 
-  handleSubmit = (event, errors,
-                  {
-                    formRealizedAt,
-                    formMeasureType,
-                    formAdditionalInformation,
-                    formContainer,
-                    formCurrentContainerId
-                  }) => {
+  constructor(props) {
+    super(props);
+    this.handleValidSubmit = this.handleValidSubmit.bind(this);
+  }
+
+
+  handleValidSubmit(event, {
+    formRealizedAt,
+    formMeasureType,
+    formAdditionalInformation,
+    formContainer,
+    formCurrentContainerId
+  }) {
     const { handleAddMeasure } = this.props;
     handleAddMeasure(formRealizedAt, formMeasureType, formAdditionalInformation, formContainer, formCurrentContainerId);
-  };
+  }
+
 
   render() {
     const { handleClose, measureTypes } = this.props;
@@ -47,7 +53,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="measures-add-page" autoFocus={false}>
-        <AvForm onSubmit={this.handleSubmit} model={defaultValues}>
+        <AvForm onValidSubmit={this.handleValidSubmit} model={defaultValues}>
           <ModalHeader id="measures-add-title" toggle={handleClose}>
             <Translate contentKey="openCellarBookApp.measureEntry.add.title" interpolate={{ param: currentContainer ? currentContainer.name : "" }}>Add Measure</Translate>
           </ModalHeader>
@@ -113,7 +119,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                         <option value="" key="0" />
                         { this.props.containers && this.props.containers.length > 0 ?
                           this.props.containers
-                            .filter(c => !c.currentMeasures || c.currentMeasures.length === 0)
+                            .filter(c => c.id !== this.props.currentContainerId)
                             .map(otherEntity => (
                             <option value={otherEntity.id} key={otherEntity.id}>
                               {otherEntity.name}
