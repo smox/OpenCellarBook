@@ -147,5 +147,8 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
+  "misc": {
+    "loggedOut": "Logged out successfully!"
+  },
   "footer": "This is your footer"
 }

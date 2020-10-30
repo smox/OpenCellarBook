@@ -6,19 +6,21 @@
       "home": "Startseite",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "manage-containers": "Tanks verwalten",
+      "reports": "Auswertungen",
+      "settings": "Einstellungen",
       "entities": {
         "main": "Entitäten",
-        "container": "Container",
-        "location": "Location",
-        "containerType": "Container Type",
-        "measureType": "Measure Type",
-        "measurePropertyType": "Measure Property Type",
-        "measurePropertyValue": "Measure Property Value",
-        "uiType": "Ui Type",
-        "measureEntry": "Measure Entry",
-        "measurePropertyTypeGroup": "Measure Property Type Group",
-        "measureTypeGroup": "Measure Type Group",
-        "possiblePTypesForMTypes": "Possible P Types For M Types",
+        "container": "Fäßer",
+        "location": "Standorte",
+        "containerType": "Faßarten",
+        "measureType": "Maßnahmen",
+        "measurePropertyType": "Eigenschaftstypen",
+        "measurePropertyValue": "Eigenschaftswerte",
+        "uiType": "UI Elemente",
+        "measureEntry": "Maßnahmeneinträge",
+        "measurePropertyTypeGroup": "Maßnahmeneigenschaftstypgruppe",
+        "measureTypeGroup": "Maßnahmentypgruppe",
+        "possiblePTypesForMTypes": "Mögliche Eigenschaftstypen zu Maßnahmen",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -150,7 +152,8 @@
   },
   "misc": {
     "email": "E-Mail",
-    "measures": "Maßnahmen"
+    "measures": "Maßnahmen",
+    "loggedOut": "Erfolgreich abgemeldet"
   },
   "footer": "Diese Software ist lizensiert unter der GPLv3. Verwendung auf eigene Gefahr."
 }

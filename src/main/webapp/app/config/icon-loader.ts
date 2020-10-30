@@ -33,6 +33,12 @@ import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons/faWineGlass';
 import { faWineGlassAlt } from '@fortawesome/free-solid-svg-icons/faWineGlassAlt';
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt';
+import { faGlassWhiskey } from '@fortawesome/free-solid-svg-icons/faGlassWhiskey';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons/faClipboardCheck';
+import { faFlask } from '@fortawesome/free-solid-svg-icons/faFlask';
+import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
 
 export const loadIcons = () => {
   library.add(
@@ -68,6 +74,11 @@ export const loadIcons = () => {
     faSearch,
     faWineBottle,
     faWineGlass,
-    faWineGlassAlt
+    faWineGlassAlt,
+    faWrench,
+    faClipboardCheck,
+    faGlassWhiskey,
+    faGlobeEurope,
+    faFlask
   );
 };
