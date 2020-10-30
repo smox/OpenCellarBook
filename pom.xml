@@ -5,7 +5,7 @@
 
     <groupId>org.sm0x.tools.opencellarbook</groupId>
     <artifactId>open-cellar-book</artifactId>
-    <version>0.0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Open Cellar Book</name>
 
