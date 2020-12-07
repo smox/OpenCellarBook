@@ -39,6 +39,7 @@ import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons/faClipboardCheck';
 import { faFlask } from '@fortawesome/free-solid-svg-icons/faFlask';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
+import {faPrint} from "@fortawesome/free-solid-svg-icons/faPrint";
 
 export const loadIcons = () => {
   library.add(
@@ -79,6 +80,7 @@ export const loadIcons = () => {
     faClipboardCheck,
     faGlassWhiskey,
     faGlobeEurope,
-    faFlask
+    faFlask,
+    faPrint
   );
 };

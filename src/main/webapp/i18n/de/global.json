@@ -6,7 +6,7 @@
       "home": "Startseite",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "manage-containers": "Tanks verwalten",
-      "reports": "Auswertungen",
+      "reports": "Berichte",
       "settings": "Einstellungen",
       "entities": {
         "main": "Entitäten",
@@ -95,6 +95,8 @@
       }
     },
     "field": {
+      "wineHarvestNumberId": "Lesenummer",
+      "externalBottledId": "Öffentlicher Abfüllcode",
       "id": "ID"
     },
     "ribbon": {
@@ -113,7 +115,9 @@
       "edit": "Bearbeiten",
       "open": "Öffnen",
       "save": "Speichern",
-      "view": "Details"
+      "view": "Details",
+      "print": "Drucken",
+      "createReport": "Erzeuge Bericht"
     },
     "detail": {
       "field": "Feld",

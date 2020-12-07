@@ -29,6 +29,8 @@
         "title": "Measure Entry"
       },
       "realizedAt": "Erledigt am",
+      "harvestAt": "Lese am",
+      "bottledAt": "Abgefüllt am",
       "createdAt": "Created At",
       "additionalInformation": "Zusätzliche Informationen",
       "deletedAt": "Deleted At",
@@ -37,7 +39,10 @@
       "container": "Tank",
       "currentContainer": "Aktueller Tank",
       "measureType": "Maßnahmenart",
-      "parent": "Parent"
+      "harvestType": "Leseart",
+      "bottledType": "Abfüllungsart",
+      "parent": "Parent",
+      "actions": "Aktionen"
     }
   }
 }

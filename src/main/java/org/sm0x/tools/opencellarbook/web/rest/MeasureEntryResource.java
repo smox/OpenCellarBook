@@ -105,7 +105,7 @@ public class MeasureEntryResource {
     }
 
     /**
-     * {@code GET  /measure-entries} : get all the measureEntries.
+     * {@code GET  /measure-entries} : get all measureEntries.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measureEntries in body.
      */
@@ -113,6 +113,28 @@ public class MeasureEntryResource {
     public List<MeasureEntry> getAllMeasureEntries() {
         log.debug("REST request to get all MeasureEntries");
         return measureEntryRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /measure-entries/bottled} : get all bottled measureEntries.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measureEntries in body.
+     */
+    @GetMapping("/measure-entries/bottled")
+    public List<MeasureEntry> getAllBottledMeasureEntries() {
+        log.debug("REST request to get all bottled MeasureEntries");
+        return measureEntryRepository.findAllBottled();
+    }
+
+    /**
+     * {@code GET  /measure-entries/bottled} : get all bottled measureEntries.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measureEntries in body.
+     */
+    @GetMapping("/measure-entries/bottled/{id}")
+    public List<MeasureEntry> getAllMeasureEntriesByBottledMeasureEntry(@PathVariable Long id) {
+        log.debug("REST request to get all MeasureEntries by bottled MeasureEntry: {}", id);
+        return measureEntryRepository.findAllByBottledId(id);
     }
 
     /**

@@ -1,8 +1,3 @@
-import axios from 'axios';
-import { ICrudGetAllAction } from 'react-jhipster';
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-import { IContainer } from 'app/shared/model/container.model';
-
 export const ACTION_TYPES = {
   SELECTED_MEASURE_TYPE: 'add-modal/SELECTED_MEASURE_TYPE',
 };

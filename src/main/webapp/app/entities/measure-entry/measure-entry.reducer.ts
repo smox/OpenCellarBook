@@ -108,7 +108,7 @@ export const getEntities: ICrudGetAllAction<IMeasureEntry> = (page, size, sort) 
 });
 
 // Actions
-export const getEntitiesWithCurrentContainerAssigned: ICrudGetAllAction<IMeasureEntry> = (page, size, sort) => ({
+export const getEntitiesWithCurrentContainerAssigned: ICrudGetAllAction<IMeasureEntry> = () => ({
   type: ACTION_TYPES.FETCH_MEASUREENTRY_LIST,
   payload: axios.get<IMeasureEntry>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
 });

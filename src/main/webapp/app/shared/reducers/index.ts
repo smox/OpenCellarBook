@@ -7,6 +7,7 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import manageContainer, { ManageContainerState } from 'app/modules/container/manage/manage.reducer';
+import exportReports, {ExportReportsState} from "app/modules/reports/export/export.reducer";
 import addMeasureEntryModal, { AddMeasureEntryModalState } from 'app/modules/measure-entry/add-modal.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
@@ -14,6 +15,7 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+
 // prettier-ignore
 import container, {
   ContainerState
@@ -86,6 +88,7 @@ export interface IRootState {
   readonly possiblePTypesForMTypes: PossiblePTypesForMTypesState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
+  readonly exportReports: ExportReportsState;
 }
 
 const rootReducer = combineReducers<IRootState>({
@@ -112,8 +115,9 @@ const rootReducer = combineReducers<IRootState>({
   measurePropertyTypeGroup,
   measureTypeGroup,
   possiblePTypesForMTypes,
-  /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
+  exportReports
+  /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 });
 
 export default rootReducer;
