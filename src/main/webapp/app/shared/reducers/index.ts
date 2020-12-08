@@ -7,7 +7,7 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import manageContainer, { ManageContainerState } from 'app/modules/container/manage/manage.reducer';
-import exportReports, {ExportReportsState} from "app/modules/reports/export/export.reducer";
+import exportReports, { ExportReportsState } from 'app/modules/reports/export/export.reducer';
 import addMeasureEntryModal, { AddMeasureEntryModalState } from 'app/modules/measure-entry/add-modal.reducer';
 import userManagement, { UserManagementState } from 'app/modules/administration/user-management/user-management.reducer';
 import register, { RegisterState } from 'app/modules/account/register/register.reducer';
@@ -116,7 +116,7 @@ const rootReducer = combineReducers<IRootState>({
   measureTypeGroup,
   possiblePTypesForMTypes,
   loadingBar,
-  exportReports
+  exportReports,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 });
 
