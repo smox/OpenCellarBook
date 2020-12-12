@@ -1,0 +1,23 @@
+{
+  "openCellarBookApp": {
+    "possiblePTypesForFEffect": {
+      "home": {
+        "title": "Possible P Types For F Effects",
+        "createLabel": "Possible P Types For F Effect erstellen",
+        "createOrEditLabel": "Possible P Types For F Effect erstellen oder bearbeiten",
+        "notFound": "No Possible P Types For F Effects found"
+      },
+      "created": "Possible P Types For F Effect erstellt mit ID {{ param }}",
+      "updated": "Possible P Types For F Effect aktualisiert mit ID {{ param }}",
+      "deleted": "Possible P Types For F Effect gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Possible P Types For F Effect {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Possible P Types For F Effect"
+      },
+      "fillingEffect": "Filling Effect",
+      "measurePropertyType": "Measure Property Type"
+    }
+  }
+}

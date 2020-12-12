@@ -1,12 +1,12 @@
-import {FAILURE, REQUEST, SUCCESS} from "app/shared/reducers/action-type.util";
-import {ICrudGetAllAction} from "react-jhipster";
-import {IMeasureEntry} from "app/shared/model/measure-entry.model";
+import { FAILURE, REQUEST, SUCCESS } from "app/shared/reducers/action-type.util";
+import { ICrudGetAllAction } from "react-jhipster";
+import { IMeasureEntry } from "app/shared/model/measure-entry.model";
 import axios from "axios";
-import {IContainer} from "app/shared/model/container.model";
+import { IContainer } from "app/shared/model/container.model";
 
 export const ACTION_TYPES = {
   FETCH_BOTTLED_MEASURE_ENTRIES: 'REPORTS/EXPORT/FETCH_BOTTLED_MEASURE_ENTRIES',
-  FETCH_MEASURE_ENTRIES: 'REPORTS/EXPORT/FETCH_MEASURE_ENTRIES'
+  FETCH_MEASURE_ENTRIES: 'REPORTS/EXPORT/FETCH_MEASURE_ENTRIES',
 };
 
 const initialState = {
@@ -88,7 +88,6 @@ export default (state: ExportReportsState = initialState, action): ExportReports
       };
 
     case REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRIES):
-
       return {
         ...state,
         measureEntries: {
@@ -120,7 +119,6 @@ export default (state: ExportReportsState = initialState, action): ExportReports
       }
 
     case FAILURE(ACTION_TYPES.FETCH_MEASURE_ENTRIES):
-
       return {
         ...state,
         measureEntries: {
@@ -147,11 +145,10 @@ export const loadBottledMeasureEntries: ICrudGetAllAction<IMeasureEntry> = () =>
   payload: axios.get<IContainer>(`${apiMeasureEntries}/bottled?cacheBuster=${new Date().getTime()}`),
 });
 
-export const createReport: ICrudGetAllAction<IMeasureEntry> = (id: number) => ({
-  type: ACTION_TYPES.FETCH_MEASURE_ENTRIES,
-  payload: axios.get<IContainer>(`${apiMeasureEntries}/bottled/${id}?cacheBuster=${new Date().getTime()}`),
-  meta: {
-    id
-  }
+export const createReport: ICrudGetAllAction<IMeasureEntry> = (id) => ({
+    type: ACTION_TYPES.FETCH_MEASURE_ENTRIES,
+    payload: axios.get<IContainer>(`${apiMeasureEntries}/bottled/${id}?cacheBuster=${new Date().getTime()}`),
+    meta: {
+      id
+    }
 });
-

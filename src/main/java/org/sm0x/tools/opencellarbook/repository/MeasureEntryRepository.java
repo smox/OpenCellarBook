@@ -25,8 +25,8 @@ public interface MeasureEntryRepository extends JpaRepository<MeasureEntry, Long
 
 
     @Query("SELECT entry " +
-        "from MeasureEntry entry " +
-        "where entry.id = :id " +
+        "FROM MeasureEntry entry " +
+        "WHERE entry.id = :id " +
         "   OR entry.parent.id = (SELECT entry2.parent.id FROM MeasureEntry entry2 WHERE entry2.id = :id)" +
         "   OR entry.id = (SELECT entry3.parent.id FROM MeasureEntry entry3 WHERE entry3.id = :id)")
     List<MeasureEntry> findAllByBottledId(@Param("id") Long id);

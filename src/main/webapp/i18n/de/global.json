@@ -7,6 +7,7 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "manage-containers": "Tanks verwalten",
       "reports": "Berichte",
+      "bottled": "Abfüllungen",
       "settings": "Einstellungen",
       "entities": {
         "main": "Entitäten",
@@ -21,6 +22,7 @@
         "measurePropertyTypeGroup": "Maßnahmeneigenschaftstypgruppe",
         "measureTypeGroup": "Maßnahmentypgruppe",
         "possiblePTypesForMTypes": "Mögliche Eigenschaftstypen zu Maßnahmen",
+        "possiblePTypesForFEffect": "Possible P Types For F Effect",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

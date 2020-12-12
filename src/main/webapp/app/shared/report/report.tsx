@@ -1,8 +1,9 @@
 import React from 'react';
-import {FillingEffect} from "app/shared/model/enumerations/filling-effect.model";
-import {IMeasureEntry} from "app/shared/model/measure-entry.model";
+import { FillingEffect } from "app/shared/model/enumerations/filling-effect.model";
+import { IMeasureEntry } from "app/shared/model/measure-entry.model";
 import ReportStyles from "app/shared/report/styles";
-import {Document, Page, Text, View} from "@react-pdf/renderer";
+import { Document, Page, Text, View } from "@react-pdf/renderer";
+import { WellKnownPropertyTypes } from "app/shared/constants/WellKnownPropertyTypes";
 
 export interface IReportProps {
   measureEntries: readonly IMeasureEntry[]
@@ -10,9 +11,12 @@ export interface IReportProps {
 
 export const Report = ({ measureEntries }: IReportProps) => {
 
-  const title = measureEntries  // TODO: extract to settings object
-    .filter(me => me.measureType && me.measureType.fillingEffect === FillingEffect.BOTTLED)[0]
-    .additionalInformation;
+  const bottledEntry = measureEntries
+    .filter(me => me.measureType && me.measureType.fillingEffect === FillingEffect.BOTTLED)[0];
+
+  let title = bottledEntry.measurePropertyValues
+    .find(value => value.measurePropertyType.id === WellKnownPropertyTypes.WINE_DESIGNATION.typeId)?.value;
+  title = title ? title : bottledEntry.additionalInformation;
 
   const companyNumber = "1663157"; // TODO: extract to settings object
 
@@ -24,7 +28,11 @@ export const Report = ({ measureEntries }: IReportProps) => {
 
   const vintageString = vintage.join(', '); // build a String
 
-  const bottledId = "789db84a-6f6c-43b3-9fac-dabad9fe3d83"; // TODO: Öffentlicher Abfüllcode hinzufügen
+  const bottledId = bottledEntry && bottledEntry.measurePropertyValues ?
+    bottledEntry
+      .measurePropertyValues
+      .find(bottledValue => bottledValue.measurePropertyType.id === WellKnownPropertyTypes.EXTERNAL_BOTTLED_CODE.typeId)
+      ?.value : null;
 
   return (
     <Document>
@@ -50,7 +58,7 @@ export const Report = ({ measureEntries }: IReportProps) => {
               measureEntries.map((measureEntry, index) => (
                 <View key={index} style={ReportStyles.tableRow}>
                   <View style={ReportStyles.tableColDate}>
-                    <Text style={ReportStyles.tableCell}>{ measureEntry.realizedAt }</Text>
+                    <Text style={ReportStyles.tableCell}>{ new Date(measureEntry.realizedAt).toLocaleDateString() }</Text>
                   </View>
                   <View style={ReportStyles.tableColAmount}>
                     <Text style={ReportStyles.tableCell}>{ measureEntry.container.capacity } Liter</Text>
@@ -59,7 +67,25 @@ export const Report = ({ measureEntries }: IReportProps) => {
                     <Text style={ReportStyles.tableCell}>{ measureEntry.container.name }</Text>
                   </View>
                  <View style={ReportStyles.tableColMeasures}>
-                    <Text style={ReportStyles.tableCell}>{ measureEntry.measureType.name } ({measureEntry.additionalInformation})</Text>
+                    <Text style={ReportStyles.tableCell}>{ measureEntry.measureType.name } ({ measureEntry.additionalInformation })</Text>
+                    {
+                       measureEntry.measurePropertyValues && measureEntry.measurePropertyValues.length > 0 ? (
+                         <Text style={ReportStyles.tableCell}>
+                           {
+                             measureEntry.measurePropertyValues.map((value, valueIndex) => {
+                               if (value.value) {
+                                 if (measureEntry.measurePropertyValues.length === valueIndex + 1) {
+                                   return `${value.measurePropertyType.type}: ${value.value}`
+                                 } else {
+                                   return `${value.measurePropertyType.type}: ${value.value}, `
+                                 }
+                               } else {
+                                 return ``;
+                               }
+                             })
+                           }
+                        </Text> ) : null
+                    }
                   </View>
                 </View>
               ))

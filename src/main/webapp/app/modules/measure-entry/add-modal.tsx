@@ -8,17 +8,44 @@ import {connect} from "react-redux";
 import {setSelectedMeasureTypeId} from "app/modules/measure-entry/add-modal.reducer";
 import {FillingEffect} from "app/shared/model/enumerations/filling-effect.model";
 import {IContainer} from "app/shared/model/container.model";
+import {IPossiblePTypesForFEffect} from "app/shared/model/possible-p-types-for-f-effect.model";
+import {IMeasurePropertyType} from "app/shared/model/measure-property-type.model";
+import {UiElement} from "app/shared/model/enumerations/ui-element.model";
 
 export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
   showModal: boolean;
   handleAddMeasure: Function;
   handleClose: Function;
   measureTypes: readonly IMeasureType[];
+  measurePropertyTypes: readonly IMeasurePropertyType[];
+  propertyTypesForFillEffect: readonly IPossiblePTypesForFEffect[];
   containers: readonly IContainer[];
   currentContainerId: number;
 }
 
-class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
+function isElementSupported(pptff: IMeasurePropertyType) {
+  return pptff.uiType.element === UiElement.TEXT_FIELD || pptff.uiType.element === UiElement.HIDDEN
+}
+
+function parseExpressions(pptff: IMeasurePropertyType): string[] {
+
+  if(pptff.uiType.expression) {
+
+    const expression = pptff.uiType.expression.endsWith(";")
+      ? pptff.uiType.expression.substr(0, pptff.uiType.expression.length-1).toUpperCase()
+      : pptff.uiType.expression.toUpperCase();
+
+    if(expression.includes(";")) {
+      return [expression];
+    } else {
+      return expression.split(";");
+    }
+  }
+
+  return [];
+}
+
+class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps, any> {
 
   constructor(props) {
     super(props);
@@ -26,20 +53,15 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
   }
 
 
-  handleValidSubmit(event, {
-    formRealizedAt,
-    formMeasureType,
-    formAdditionalInformation,
-    formContainer,
-    formCurrentContainerId
-  }) {
-    const { handleAddMeasure } = this.props;
-    handleAddMeasure(formRealizedAt, formMeasureType, formAdditionalInformation, formContainer, formCurrentContainerId);
+  handleValidSubmit(event, form) {
+    const { handleAddMeasure, measurePropertyTypes } = this.props;
+    handleAddMeasure(form, measurePropertyTypes);
   }
 
 
   render() {
-    const { handleClose, measureTypes } = this.props;
+
+    const { handleClose, measureTypes, propertyTypesForFillEffect } = this.props;
 
     const defaultValues = {
       formRealizedAt: new Date().toISOString().substr(0,10),
@@ -51,9 +73,13 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
 
     const selectedMeasureType = measureTypes.find(mt => mt.id === Number(this.props.selectedMeasureTypeId));
 
+    const possiblePropertyTypesForFillEffect = propertyTypesForFillEffect
+      .filter(ptff => selectedMeasureType && ptff.fillingEffect === selectedMeasureType.fillingEffect)
+      .map(ptff => ptff.measurePropertyType);
+
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="measures-add-page" autoFocus={false}>
-        <AvForm onValidSubmit={this.handleValidSubmit} model={defaultValues}>
+        <AvForm onValidSubmit={this.handleValidSubmit} model={defaultValues} >
           <ModalHeader id="measures-add-title" toggle={handleClose}>
             <Translate contentKey="openCellarBookApp.measureEntry.add.title" interpolate={{ param: currentContainer ? currentContainer.name : "" }}>Add Measure</Translate>
           </ModalHeader>
@@ -66,7 +92,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                   </Label>
                   <AvField id="measure-entry-realizedAt"  type="date" className="form-control"
                            name="formRealizedAt"
-                           errorMessage={translate('openCellarBookApp.measureEntry.add.createdAt.errorMessage')}
+                           errorMessage={translate('openCellarBookApp.measureEntry.add.createdAt.fillErrorMessage')}
                            required />
                 </AvGroup>
                 <AvGroup>
@@ -99,6 +125,32 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps> {
                     }
                   </AvInput>
                 </AvGroup>
+                {
+                  possiblePropertyTypesForFillEffect
+                    .filter((pptff) => isElementSupported(pptff))
+                      .map((pptff, index) => {
+                        const expression = parseExpressions(pptff);
+                        if(pptff.uiType.element === UiElement.HIDDEN) {
+                          return (
+                            <AvField
+                              name={`formPropertyTypeForFillEffect-${pptff.id}`}
+                              key={index}
+                              hidden={true}
+                            />
+                          )
+                        } else {
+                          return (
+                            <AvField
+                              key={index}
+                              name={`formPropertyTypeForFillEffect-${pptff.id}`}
+                              label={pptff.type}
+                              errorMessage={translate('openCellarBookApp.measureEntry.add.fillErrorMessage')}
+                              required={ !!expression.find(exp => exp === "REQUIRED") }
+                            />
+                          )
+                        }
+                      })
+                }
                 <AvField
                   name="formAdditionalInformation"
                   label={translate('openCellarBookApp.measureEntry.additionalInformation')}

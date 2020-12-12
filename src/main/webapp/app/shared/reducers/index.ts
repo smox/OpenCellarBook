@@ -60,6 +60,10 @@ import measureTypeGroup, {
 import possiblePTypesForMTypes, { PossiblePTypesForMTypesState }
   from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
 
+// prettier-ignore
+import possiblePTypesForFEffect, {
+  PossiblePTypesForFEffectState
+} from 'app/entities/possible-p-types-for-f-effect/possible-p-types-for-f-effect.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -86,6 +90,7 @@ export interface IRootState {
   readonly measurePropertyTypeGroup: MeasurePropertyTypeGroupState;
   readonly measureTypeGroup: MeasureTypeGroupState;
   readonly possiblePTypesForMTypes: PossiblePTypesForMTypesState;
+  readonly possiblePTypesForFEffect: PossiblePTypesForFEffectState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
   readonly exportReports: ExportReportsState;
@@ -117,6 +122,7 @@ const rootReducer = combineReducers<IRootState>({
   possiblePTypesForMTypes,
   loadingBar,
   exportReports,
+  possiblePTypesForFEffect,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 });
 

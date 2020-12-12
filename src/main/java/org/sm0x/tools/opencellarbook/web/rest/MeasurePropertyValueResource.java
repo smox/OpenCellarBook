@@ -1,5 +1,6 @@
 package org.sm0x.tools.opencellarbook.web.rest;
 
+import org.sm0x.tools.opencellarbook.domain.MeasureEntry;
 import org.sm0x.tools.opencellarbook.domain.MeasurePropertyValue;
 import org.sm0x.tools.opencellarbook.repository.MeasurePropertyValueRepository;
 import org.sm0x.tools.opencellarbook.web.rest.errors.BadRequestAlertException;
@@ -88,6 +89,19 @@ public class MeasurePropertyValueResource {
     public List<MeasurePropertyValue> getAllMeasurePropertyValues() {
         log.debug("REST request to get all MeasurePropertyValues");
         return measurePropertyValueRepository.findAll();
+    }
+
+    @GetMapping("/measure-property-values/bottled/{id}")
+    public List<MeasurePropertyValue> getAllMeasurePropertyValuesForAllMeasureEntriesByBottledId(@PathVariable Long id) {
+        log.debug("REST request to get all MeasurePropertyValues for all MeasureEntries by bottled MeasureEntry ID : {}", id);
+        return measurePropertyValueRepository.findByBottledId(id);
+    }
+
+    @GetMapping("/measure-property-values/measures")
+    @ResponseBody
+    public List<MeasurePropertyValue> getAllMeasurePropertyValuesByMeasureIds(@RequestParam List<Long> ids) {
+        log.debug("REST request to get getAllMeasurePropertyValuesByMeasureId : {}", ids);
+        return measurePropertyValueRepository.findAllByMeasureEntry_Ids(ids);
     }
 
     /**

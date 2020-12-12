@@ -2,6 +2,7 @@
   "openCellarBookApp": {
     "UiElement": {
       "null": "",
+      "HIDDEN": "HIDDEN",
       "TEXT_FIELD": "TEXT_FIELD",
       "INTEGER_SPINNER": "INTEGER_SPINNER",
       "DECIMAL_SPINNER": "DECIMAL_SPINNER",

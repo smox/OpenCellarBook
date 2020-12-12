@@ -18,6 +18,7 @@
         "measurePropertyTypeGroup": "Measure Property Type Group",
         "measureTypeGroup": "Measure Type Group",
         "possiblePTypesForMTypes": "Possible P Types For M Types",
+        "possiblePTypesForFEffect": "Possible P Types For F Effect",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

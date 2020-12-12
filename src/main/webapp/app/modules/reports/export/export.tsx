@@ -24,7 +24,7 @@ const ExportReports = () => {
 
   return (
     <div>
-      <h1><Translate contentKey="global.menu.reports">Reports</Translate></h1>
+      <h1><Translate contentKey="global.menu.bottled">Reports</Translate></h1>
       { allBottled && Object.keys(allBottled).length > 0 ? (
         <div className="table-responsive">
           <Table responsive>

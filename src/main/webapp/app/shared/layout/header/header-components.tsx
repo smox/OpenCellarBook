@@ -54,7 +54,7 @@ export const Reports = props => (
     <NavLink tag={Link} to="/reports" className="d-flex align-items-center">
       <FontAwesomeIcon icon="clipboard-check" />&nbsp;
       <span>
-        <Translate contentKey="global.menu.reports">Settings</Translate>
+        <Translate contentKey="global.menu.bottled">Abfüllungen</Translate>
       </span>
     </NavLink>
   </NavItem>

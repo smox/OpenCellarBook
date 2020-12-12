@@ -92,6 +92,7 @@ export const UiTypeUpdate = (props: IUiTypeUpdateProps) => {
                   name="element"
                   value={(!isNew && uiTypeEntity.element) || 'TEXT_FIELD'}
                 >
+                  <option value="HIDDEN">{translate('openCellarBookApp.UiElement.DATE_TIME_PICKER')}</option>
                   <option value="TEXT_FIELD">{translate('openCellarBookApp.UiElement.TEXT_FIELD')}</option>
                   <option value="INTEGER_SPINNER">{translate('openCellarBookApp.UiElement.INTEGER_SPINNER')}</option>
                   <option value="DECIMAL_SPINNER">{translate('openCellarBookApp.UiElement.DECIMAL_SPINNER')}</option>

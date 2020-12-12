@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {IRootState} from "app/shared/reducers";
-import {connect} from "react-redux";
-import {Translate} from "react-jhipster";
+import React, { useEffect } from 'react';
+import { IRootState } from "app/shared/reducers";
+import { connect } from "react-redux";
+import { Translate } from "react-jhipster";
 import {
   getEntities,
   hideAddMeasureModal,
@@ -11,47 +11,85 @@ import {
   updateMeasureEntries
 } from "app/modules/container/manage/manage.reducer";
 import { getEntities as getMeasureTypes } from 'app/entities/measure-type/measure-type.reducer';
+import { getEntities  as getPropertyTypesForFillEffect } from 'app/entities/possible-p-types-for-f-effect/possible-p-types-for-f-effect.reducer';
+import { getEntities  as getMeasurePropertyTypes } from 'app/entities/measure-property-type/measure-property-type.reducer';
+import { createEntity as createMeasurePropertyValue } from 'app/entities/measure-property-value/measure-property-value.reducer';
 import './manage.scss';
 import Container from "app/shared/layout/container/container";
 import AddMeasureModal from "app/modules/measure-entry/add-modal";
-import {IMeasureType} from "app/shared/model/measure-type.model";
-import {IContainer} from "app/shared/model/container.model";
-import {FillingEffect} from "app/shared/model/enumerations/filling-effect.model";
-import {toDateString} from "app/shared/util/date-utils";
+import { FillingEffect } from "app/shared/model/enumerations/filling-effect.model";
+import { toDateString } from "app/shared/util/date-utils";
+import { IMeasurePropertyValue } from "app/shared/model/measure-property-value.model";
+import { IMeasurePropertyType } from "app/shared/model/measure-property-type.model";
+import {WellKnownPropertyTypes} from "app/shared/constants/WellKnownPropertyTypes";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface IManageContainersProps extends StateProps, DispatchProps {}
+
+function extractPropertyValuesByForm(form: any, measurePropertyTypes: IMeasurePropertyType[]): IMeasurePropertyValue[] {
+  const propertyTypeValue: IMeasurePropertyValue[] = [];
+  for(const key in form) {
+    if(key.startsWith("formPropertyType")) {
+      const id = key.substr(key.indexOf("-")+1);
+      propertyTypeValue.push({
+        measurePropertyType: measurePropertyTypes.find(mpt => mpt.id === Number(id)),
+        value: form[key]
+      })
+    }
+  }
+  return propertyTypeValue;
+}
 
 export const ManageContainersPage = (props: IManageContainersProps) => {
 
   useEffect(() => {
     props.getEntities();
     props.getMeasureTypes();
+    props.getPropertyTypesForFillEffect();
+    props.getMeasurePropertyTypes();
   }, []);
 
-  function addMeasureEntry(realizedAt: string, measureType: IMeasureType,
-                           additionalInformation: string, container: IContainer, currentContainerId: number) {
+  function addMeasureEntry(form: any, measurePropertyTypes: IMeasurePropertyType[]) {
 
-    measureType = props.measureTypes.find(mt => mt.id === Number(measureType.id));
+    const measureTypeId  = form["formMeasureType"];
+    const realizedAt = form["formRealizedAt"];
+    const additionalInformation = form["formAdditionalInformation"];
+    const container = form["formContainer"];
+    const currentContainerId = form["formCurrentContainerId"];
+
+
+    const measureType = props.measureTypes.find(mt => mt.id === Number(measureTypeId.id));
     const currentContainer = props.containers.find(c => c.id === Number(currentContainerId));
     const currentMeasures = currentContainer.currentMeasures;
     const parent = currentMeasures && currentMeasures.length > 0 ?
       currentMeasures.find(cm => cm.measureType.fillingEffect === FillingEffect.REFILL) : null;
 
-    if(measureType.fillingEffect === FillingEffect.REFILL) {
+    const measurePropertyValuesToAdd = extractPropertyValuesByForm(form, measurePropertyTypes);
 
-      props.createMeasureEntry({
+    if(measureType.fillingEffect === FillingEffect.REFILL) {
+      const newMeasureEntry = {
         createdAt: toDateString(new Date()),
         realizedAt,
         measureType,
         additionalInformation,
         container: currentContainer,
         currentContainer,
+        measurePropertyValues: measurePropertyValuesToAdd,
         parent
-      });
+      }
+      props.createMeasureEntry(newMeasureEntry);
 
     } else if (measureType.fillingEffect === FillingEffect.TRANSFILL) {
 
       const newContainer = props.containers.find(c => c.id === Number(container.id));
+
+      measurePropertyValuesToAdd
+        .find( value => value.measurePropertyType.id === WellKnownPropertyTypes.TRANSFILL_FROM.typeId)
+        .value = currentContainer.name;
+
+      measurePropertyValuesToAdd
+        .find( value => value.measurePropertyType.id === WellKnownPropertyTypes.TRANSFILL_TO.typeId)
+        .value = newContainer.name;
 
       props.createMeasureEntryOnly({
         createdAt: toDateString(new Date()),
@@ -60,6 +98,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
         additionalInformation,
         container: currentContainer,
         currentContainer: newContainer,
+        measurePropertyValues: measurePropertyValuesToAdd,
         parent
       });
 
@@ -71,15 +110,19 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
 
     } else if (measureType.fillingEffect === FillingEffect.BOTTLED) {
 
+      measurePropertyValuesToAdd
+        .find( value => value.measurePropertyType.id === WellKnownPropertyTypes.EXTERNAL_BOTTLED_CODE.typeId)
+        .value = uuidv4();
+
       props.createMeasureEntryOnly({
         createdAt: toDateString(new Date()),
         realizedAt,
         measureType,
         additionalInformation,
         container: currentContainer,
+        measurePropertyValues: measurePropertyValuesToAdd,
         parent
       });
-
 
       currentMeasures.forEach(measureEntryToBottle => {
         measureEntryToBottle.currentContainer = null;
@@ -96,6 +139,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
         additionalInformation,
         container: currentContainer,
         currentContainer,
+        measurePropertyValues: measurePropertyValuesToAdd,
         parent
       });
     }
@@ -123,15 +167,19 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
                        currentContainerId={ props.currentContainerId }
                        handleClose={ props.setHideAddMeasureModal }
                        measureTypes={ props.measureTypes }
+                       propertyTypesForFillEffect={ props.propertyTypesForFillEffect }
+                       measurePropertyTypes={ props.measurePropertyTypes }
                        containers={ props.containers } />
     </>
   );
 
 }
 
-const mapStateToProps = ({ authentication, manageContainer, measureType, measureEntry }: IRootState) => ({
+const mapStateToProps = ({ authentication, manageContainer, measureType, measureEntry, possiblePTypesForFEffect, measurePropertyType }: IRootState) => ({
   containers: manageContainer.container,
   measureTypes: measureType.entities,
+  propertyTypesForFillEffect: possiblePTypesForFEffect.entities,
+  measurePropertyTypes: measurePropertyType.entities,
   measureEntries: measureEntry.entities,
   measureEntriesWithCurrentContainer: manageContainer.measureEntriesWithCurrentContainer,
   currentContainerId: manageContainer.currentContainerId,
@@ -142,7 +190,8 @@ const mapStateToProps = ({ authentication, manageContainer, measureType, measure
 });
 
 const mapDispatchToProps = { getEntities, createMeasureEntry, updateMeasureEntries, createMeasureEntryOnly,
-  setShowAddMeasureModal: showAddMeasureModal, setHideAddMeasureModal: hideAddMeasureModal, getMeasureTypes };
+  setShowAddMeasureModal: showAddMeasureModal, setHideAddMeasureModal: hideAddMeasureModal,
+  getMeasureTypes, getPropertyTypesForFillEffect, getMeasurePropertyTypes, createMeasurePropertyValue };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

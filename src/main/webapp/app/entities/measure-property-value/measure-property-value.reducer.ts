@@ -95,17 +95,17 @@ export default (state: MeasurePropertyValueState = initialState, action): Measur
   }
 };
 
-const apiUrl = 'api/measure-property-values';
+export const apiMeasurePropertyValuesUrl = 'api/measure-property-values';
 
 // Actions
 
 export const getEntities: ICrudGetAllAction<IMeasurePropertyValue> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_MEASUREPROPERTYVALUE_LIST,
-  payload: axios.get<IMeasurePropertyValue>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
+  payload: axios.get<IMeasurePropertyValue>(`${apiMeasurePropertyValuesUrl}?cacheBuster=${new Date().getTime()}`),
 });
 
 export const getEntity: ICrudGetAction<IMeasurePropertyValue> = id => {
-  const requestUrl = `${apiUrl}/${id}`;
+  const requestUrl = `${apiMeasurePropertyValuesUrl}/${id}`;
   return {
     type: ACTION_TYPES.FETCH_MEASUREPROPERTYVALUE,
     payload: axios.get<IMeasurePropertyValue>(requestUrl),
@@ -115,7 +115,7 @@ export const getEntity: ICrudGetAction<IMeasurePropertyValue> = id => {
 export const createEntity: ICrudPutAction<IMeasurePropertyValue> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_MEASUREPROPERTYVALUE,
-    payload: axios.post(apiUrl, cleanEntity(entity)),
+    payload: axios.post(apiMeasurePropertyValuesUrl, cleanEntity(entity)),
   });
   dispatch(getEntities());
   return result;
@@ -124,13 +124,13 @@ export const createEntity: ICrudPutAction<IMeasurePropertyValue> = entity => asy
 export const updateEntity: ICrudPutAction<IMeasurePropertyValue> = entity => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.UPDATE_MEASUREPROPERTYVALUE,
-    payload: axios.put(apiUrl, cleanEntity(entity)),
+    payload: axios.put(apiMeasurePropertyValuesUrl, cleanEntity(entity)),
   });
   return result;
 };
 
 export const deleteEntity: ICrudDeleteAction<IMeasurePropertyValue> = id => async dispatch => {
-  const requestUrl = `${apiUrl}/${id}`;
+  const requestUrl = `${apiMeasurePropertyValuesUrl}/${id}`;
   const result = await dispatch({
     type: ACTION_TYPES.DELETE_MEASUREPROPERTYVALUE,
     payload: axios.delete(requestUrl),

@@ -15,6 +15,7 @@ import MeasureEntry from './measure-entry';
 import MeasurePropertyTypeGroup from './measure-property-type-group';
 import MeasureTypeGroup from './measure-type-group';
 import PossiblePTypesForMTypes from './possible-p-types-for-m-types';
+import PossiblePTypesForFEffect from './possible-p-types-for-f-effect';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -32,6 +33,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}measure-property-type-group`} component={MeasurePropertyTypeGroup} />
       <ErrorBoundaryRoute path={`${match.url}measure-type-group`} component={MeasureTypeGroup} />
       <ErrorBoundaryRoute path={`${match.url}possible-p-types-for-m-types`} component={PossiblePTypesForMTypes} />
+      <ErrorBoundaryRoute path={`${match.url}possible-p-types-for-f-effect`} component={PossiblePTypesForFEffect} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

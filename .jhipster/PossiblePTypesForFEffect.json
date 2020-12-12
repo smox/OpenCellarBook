@@ -1,0 +1,29 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [
+    {
+      "relationshipName": "measurePropertyType",
+      "otherEntityName": "measurePropertyType",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id",
+      "otherEntityRelationshipName": "possiblePTypesForFEffect"
+    }
+  ],
+  "fields": [
+    {
+      "fieldName": "fillingEffect",
+      "fieldType": "FillingEffect",
+      "fieldValues": "NO_EFFECT,REFILL,TRANSFILL,BOTTLED"
+    }
+  ],
+  "changelogDate": "20201208084557",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "serviceImpl",
+  "entityTableName": "possibleptypes_forfeffect",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

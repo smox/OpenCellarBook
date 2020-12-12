@@ -1,7 +1,9 @@
 package org.sm0x.tools.opencellarbook.web.rest;
 
 import org.sm0x.tools.opencellarbook.domain.MeasureEntry;
+import org.sm0x.tools.opencellarbook.domain.MeasurePropertyValue;
 import org.sm0x.tools.opencellarbook.repository.MeasureEntryRepository;
+import org.sm0x.tools.opencellarbook.repository.MeasurePropertyValueRepository;
 import org.sm0x.tools.opencellarbook.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -18,6 +20,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link org.sm0x.tools.opencellarbook.domain.MeasureEntry}.
@@ -35,9 +39,11 @@ public class MeasureEntryResource {
     private String applicationName;
 
     private final MeasureEntryRepository measureEntryRepository;
+    private final MeasurePropertyValueRepository measurePropertyValueRepository;
 
-    public MeasureEntryResource(MeasureEntryRepository measureEntryRepository) {
+    public MeasureEntryResource(MeasureEntryRepository measureEntryRepository, MeasurePropertyValueRepository measurePropertyValueRepository) {
         this.measureEntryRepository = measureEntryRepository;
+        this.measurePropertyValueRepository = measurePropertyValueRepository;
     }
 
     /**
@@ -53,7 +59,12 @@ public class MeasureEntryResource {
         if (measureEntry.getId() != null) {
             throw new BadRequestAlertException("A new measureEntry cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        Set<MeasurePropertyValue> measurePropertyValues = measureEntry.getMeasurePropertyValues();
         MeasureEntry result = measureEntryRepository.save(measureEntry);
+        measurePropertyValues.forEach(measurePropertyValue -> measurePropertyValue.setMeasureEntry(result));
+        measurePropertyValueRepository.saveAll(measurePropertyValues);
+
         return ResponseEntity.created(new URI("/api/measure-entries/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -122,7 +133,12 @@ public class MeasureEntryResource {
      */
     @GetMapping("/measure-entries/bottled")
     public List<MeasureEntry> getAllBottledMeasureEntries() {
-        log.debug("REST request to get all bottled MeasureEntries");
+            /*valuesByBottledId.forEach(value -> allEntriesByBottledId
+            .stream()
+            .filter(entry -> entry.getId().equals(value.getMeasureEntry().getId()))
+            .findFirst()
+            .ifPresent(entry -> entry.addMeasurePropertyValue(value))
+        );*/    log.debug("REST request to get all bottled MeasureEntries");
         return measureEntryRepository.findAllBottled();
     }
 
@@ -134,7 +150,15 @@ public class MeasureEntryResource {
     @GetMapping("/measure-entries/bottled/{id}")
     public List<MeasureEntry> getAllMeasureEntriesByBottledMeasureEntry(@PathVariable Long id) {
         log.debug("REST request to get all MeasureEntries by bottled MeasureEntry: {}", id);
-        return measureEntryRepository.findAllByBottledId(id);
+        List<MeasureEntry> allEntriesByBottledId = measureEntryRepository.findAllByBottledId(id);
+        List<MeasurePropertyValue> valuesByBottledId = measurePropertyValueRepository.findByBottledId(id);
+        allEntriesByBottledId.forEach(entry ->
+            entry.setMeasurePropertyValues(
+                valuesByBottledId.stream().filter(value -> value.getMeasureEntry().getId().equals(entry.getId())).collect(Collectors.toSet())
+            )
+        );
+
+        return allEntriesByBottledId;
     }
 
     /**

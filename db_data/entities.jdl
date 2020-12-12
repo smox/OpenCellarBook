@@ -42,6 +42,7 @@ enum FillingEffect {
 }
 
 enum UiElement {
+    HIDDEN,
 	TEXT_FIELD,
     INTEGER_SPINNER,
     DECIMAL_SPINNER,
@@ -101,7 +102,7 @@ relationship OneToMany {
     MeasureEntry to MeasurePropertyValue,
     MeasureType{children} to MeasureType{parent},
     MeasureEntry{children} to MeasureEntry{parent},
-    
+
 }
 
 relationship ManyToMany {

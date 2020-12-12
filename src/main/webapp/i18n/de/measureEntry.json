@@ -6,12 +6,13 @@
           "placeholder": "Geben Sie hier bitte zusätzliche Informationen ein"
         },
         "createdAt": {
-          "errorMessage": "Das Datum an dem die Tätigkeit durchgeführt wurde muss angegeben werden!"
+          "fillErrorMessage": "Das Datum an dem die Tätigkeit durchgeführt wurde muss angegeben werden!"
         },
         "button": {
           "label": "Hinzufügen"
         },
-        "title": "Eine neue Maßnahme für {{ param }} hinzufügen"
+        "title": "Eine neue Maßnahme für {{ param }} hinzufügen",
+        "fillErrorMessage": "Dieses Feld ist ein Pflichtfeld! Um fortzufahren muss es ausgefüllt werden!"
       },
       "home": {
         "title": "Measure Entries",

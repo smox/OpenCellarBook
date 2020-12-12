@@ -46,6 +46,9 @@ export const EntitiesMenu = props => (
     <MenuItem icon="asterisk" to="/possible-p-types-for-m-types">
       <Translate contentKey="global.menu.entities.possiblePTypesForMTypes" />
     </MenuItem>
+    <MenuItem icon="asterisk" to="/possible-p-types-for-f-effect">
+      <Translate contentKey="global.menu.entities.possiblePTypesForFEffect" />
+    </MenuItem>
     {/* jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here */}
   </NavDropdown>
 );

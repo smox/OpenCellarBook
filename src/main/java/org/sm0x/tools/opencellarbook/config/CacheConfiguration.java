@@ -76,6 +76,7 @@ public class CacheConfiguration {
             createCache(cm, org.sm0x.tools.opencellarbook.domain.PossiblePTypesForMTypes.class.getName());
             createCache(cm, org.sm0x.tools.opencellarbook.domain.Container.class.getName() + ".currentMeasures");
             createCache(cm, org.sm0x.tools.opencellarbook.domain.MeasureEntry.class.getName() + ".children");
+            createCache(cm, org.sm0x.tools.opencellarbook.domain.PossiblePTypesForFEffect.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
