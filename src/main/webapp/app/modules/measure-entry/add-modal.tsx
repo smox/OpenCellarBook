@@ -11,6 +11,7 @@ import {IContainer} from "app/shared/model/container.model";
 import {IPossiblePTypesForFEffect} from "app/shared/model/possible-p-types-for-f-effect.model";
 import {IMeasurePropertyType} from "app/shared/model/measure-property-type.model";
 import {UiElement} from "app/shared/model/enumerations/ui-element.model";
+import {IPossiblePTypesForMTypes} from "app/shared/model/possible-p-types-for-m-types.model";
 
 export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
   showModal: boolean;
@@ -19,6 +20,7 @@ export interface IAddMeasureEntryModalProps extends StateProps, DispatchProps {
   measureTypes: readonly IMeasureType[];
   measurePropertyTypes: readonly IMeasurePropertyType[];
   propertyTypesForFillEffect: readonly IPossiblePTypesForFEffect[];
+  propertyTypesForMeasureType: readonly IPossiblePTypesForMTypes[];
   containers: readonly IContainer[];
   currentContainerId: number;
 }
@@ -61,7 +63,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps, any> {
 
   render() {
 
-    const { handleClose, measureTypes, propertyTypesForFillEffect } = this.props;
+    const { handleClose, measureTypes, propertyTypesForFillEffect, propertyTypesForMeasureType } = this.props;
 
     const defaultValues = {
       formRealizedAt: new Date().toISOString().substr(0,10),
@@ -73,9 +75,14 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps, any> {
 
     const selectedMeasureType = measureTypes.find(mt => mt.id === Number(this.props.selectedMeasureTypeId));
 
-    const possiblePropertyTypesForFillEffect = propertyTypesForFillEffect
+    const possiblePropertyTypes = propertyTypesForFillEffect
       .filter(ptff => selectedMeasureType && ptff.fillingEffect === selectedMeasureType.fillingEffect)
       .map(ptff => ptff.measurePropertyType);
+
+
+    possiblePropertyTypes.push(...(propertyTypesForMeasureType
+      .filter(ptfmt => selectedMeasureType && ptfmt.measureType.id === selectedMeasureType.id))
+      .map(ptfmt => ptfmt.measurePropertyType));
 
     return (
       <Modal isOpen={this.props.showModal} toggle={handleClose} backdrop="static" id="measures-add-page" autoFocus={false}>
@@ -126,10 +133,9 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps, any> {
                   </AvInput>
                 </AvGroup>
                 {
-                  possiblePropertyTypesForFillEffect
+                  possiblePropertyTypes
                     .filter((pptff) => isElementSupported(pptff))
                       .map((pptff, index) => {
-                        const expression = parseExpressions(pptff);
                         if(pptff.uiType.element === UiElement.HIDDEN) {
                           return (
                             <AvField
@@ -139,6 +145,7 @@ class AddMeasureModal extends React.Component<IAddMeasureEntryModalProps, any> {
                             />
                           )
                         } else {
+                          const expression = parseExpressions(pptff);
                           return (
                             <AvField
                               key={index}
