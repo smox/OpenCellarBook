@@ -1,6 +1,6 @@
 # OpenCellarBook
 
-This application should help vintners to document all of the measures a vintner applies to there tanks. In Austria this is called a "Kellerbuch". 
+This application should help vintners to document all of the measures a vintner applies to his or her wines. In Austria this is called a "Kellerbuch". 
 This application was generated using JHipster 6.10.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.1](https://www.jhipster.tech/documentation-archive/v6.10.1).
 
 ## Development
