@@ -1,27 +1,30 @@
 {
   "openCellarBookApp": {
     "location": {
+      "designation": "Standort",
       "home": {
-        "title": "Locations",
-        "createLabel": "Location erstellen",
-        "createOrEditLabel": "Location erstellen oder bearbeiten",
-        "notFound": "No Locations found"
+        "title": "Standorte",
+        "createLabel": "Standort erstellen",
+        "editLabel": "Standort bearbeiten",
+        "createOrEditLabel": "Standorte erstellen oder bearbeiten",
+        "notFound": "Keine Standorte gefunden"
       },
-      "created": "Location erstellt mit ID {{ param }}",
-      "updated": "Location aktualisiert mit ID {{ param }}",
-      "deleted": "Location gelöscht mit ID {{ param }}",
+      "created": "Standort {{ param }} erstellt",
+      "updated": "Änderungen beim Standort {{ param }} gespeichert",
+      "deleted": "Standort {{ param }} gelöscht",
       "delete": {
-        "question": "Soll Location {{ id }} wirklich dauerhaft gelöscht werden?"
+        "question": "Soll Standort {{ id }} wirklich dauerhaft gelöscht werden?"
       },
       "detail": {
-        "title": "Location"
+        "title": "Standort"
       },
       "name": "Name",
-      "color": "Color",
+      "color": "Farbe",
       "icon": "Icon",
-      "orderNumber": "Order Number",
-      "deletedAt": "Deleted At",
-      "container": "Container"
+      "orderNumber": "Reihenfolge",
+      "deletedAt": "Gelöscht am",
+      "container": "Container",
+      "actions": "Aktionen"
     }
   }
 }

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Col, Row, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, ICrudGetAllAction, TextFormat } from 'react-jhipster';
+import { Button, Table } from 'reactstrap';
+import { openFile, byteSize, Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './location.reducer';
-import { ILocation } from 'app/shared/model/location.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
 export interface ILocationProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}

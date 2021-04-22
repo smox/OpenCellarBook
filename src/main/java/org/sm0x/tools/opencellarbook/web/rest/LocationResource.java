@@ -74,8 +74,9 @@ public class LocationResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Location result = locationRepository.save(location);
+        String param = "".equals(location.getName().trim()) ? location.getId().toString() : location.getName();
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, location.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, param))
             .body(result);
     }
 

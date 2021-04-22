@@ -71,6 +71,16 @@
         "register": {
           "noaccount": "Sie haben noch keinen Zugang?",
           "link": "Registrieren Sie sich"
+        },
+        "entity": {
+          "notFound": "Kein {{ entity }} gefunden",
+          "loading": "{{ entity }} wird geladen ..."
+        },
+        "entities": {
+          "notFound": "Keine {{ entities }} gefunden"
+        },
+        "orderNumber": {
+          "notFound": "Keine Reihenfolge festgelegt"
         }
       },
       "error": {

@@ -21,7 +21,8 @@
       "icon": "Icon",
       "orderNumber": "Order Number",
       "deletedAt": "Deleted At",
-      "container": "Container"
+      "container": "Container",
+      "actions": "Actions"
     }
   }
 }

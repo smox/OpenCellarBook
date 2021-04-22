@@ -5,6 +5,7 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { ILocation, defaultValue } from 'app/shared/model/location.model';
+import { EntitiesMenu } from 'app/shared/layout/menus';
 
 export const ACTION_TYPES = {
   FETCH_LOCATION_LIST: 'location/FETCH_LOCATION_LIST',
@@ -12,6 +13,7 @@ export const ACTION_TYPES = {
   CREATE_LOCATION: 'location/CREATE_LOCATION',
   UPDATE_LOCATION: 'location/UPDATE_LOCATION',
   DELETE_LOCATION: 'location/DELETE_LOCATION',
+  SET_LOCATION: 'location/SET_LOCATION',
   SET_BLOB: 'location/SET_BLOB',
   RESET: 'location/RESET',
 };
@@ -79,6 +81,10 @@ export default (state: LocationState = initialState, action): LocationState => {
         updating: false,
         updateSuccess: true,
         entity: action.payload.data,
+        entities: state.entities.reduce(
+          (prev, curr) => (curr.id === action.payload.data.id ? [...prev, action.payload.data] : [...prev, curr]),
+          []
+        ),
       };
     case SUCCESS(ACTION_TYPES.DELETE_LOCATION):
       return {
@@ -96,6 +102,12 @@ export default (state: LocationState = initialState, action): LocationState => {
           [name]: data,
           [name + 'ContentType']: contentType,
         },
+      };
+    }
+    case ACTION_TYPES.SET_LOCATION: {
+      return {
+        ...state,
+        entity: action.payload,
       };
     }
     case ACTION_TYPES.RESET:
@@ -158,6 +170,11 @@ export const setBlob = (name, data, contentType?) => ({
     data,
     contentType,
   },
+});
+
+export const setEntity = (location: ILocation) => ({
+  type: ACTION_TYPES.SET_LOCATION,
+  payload: location,
 });
 
 export const reset = () => ({
