@@ -15,7 +15,7 @@ import { getEntity, updateEntity, createEntity, reset } from './measure-entry.re
 export interface IMeasureEntryUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const MeasureEntryUpdate = (props: IMeasureEntryUpdateProps) => {
-  const [isNew ] = useState(!props.match.params || !props.match.params.id);
+  const [ isNew ] = useState(!props.match.params || !props.match.params.id);
 
   const { measureEntryEntity, measureEntries, containers, measureTypes, loading, updating } = props;
 

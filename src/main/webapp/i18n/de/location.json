@@ -13,7 +13,9 @@
       "updated": "Änderungen beim Standort {{ param }} gespeichert",
       "deleted": "Standort {{ param }} gelöscht",
       "delete": {
-        "question": "Soll Standort {{ id }} wirklich dauerhaft gelöscht werden?"
+        "header": "Standort löschen",
+        "question": "Soll Standort {{ id }} wirklich dauerhaft gelöscht werden?",
+        "action": "Löschen"
       },
       "detail": {
         "title": "Standort"

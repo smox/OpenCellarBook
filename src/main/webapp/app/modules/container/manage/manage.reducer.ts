@@ -7,7 +7,7 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 
 export const ACTION_TYPES = {
   FETCH_CONTAINER_LIST: 'manage-containers/FETCH_CONTAINER_LIST',
-  FETCH_MEASUREENTRY_LIST: 'measureEntry/FETCH_MEASUREENTRY_LIST',
+  FETCH_MEASURE_ENTRY_LIST: 'measureEntry/FETCH_MEASUREENTRY_LIST',
   CREATE_MEASURE_ENTRY: 'measureEntry/CREATE_MEASURE_ENTRY',
   UPDATE_MEASURE_ENTRIES: 'measureEntry/UPDATE_MEASURE_ENTRIES',
   FETCH_MEASURE_ENTRIES_WITH_CURRENT_CONTAINERS: 'manage-containers/FETCH_MEASURE_ENTRIES_WITH_CURRENT_CONTAINERS',
@@ -39,7 +39,7 @@ export default (state: ManageContainerState = initialState, action): ManageConta
   switch (action.type) {
     case REQUEST(ACTION_TYPES.FETCH_CONTAINER_LIST):
     case REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRIES_WITH_CURRENT_CONTAINERS):
-    case REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY_LIST):
+    case REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST):
     case REQUEST(ACTION_TYPES.CREATE_MEASURE_ENTRY):
     case REQUEST(ACTION_TYPES.UPDATE_MEASURE_ENTRIES):
       return {
@@ -67,7 +67,7 @@ export default (state: ManageContainerState = initialState, action): ManageConta
       };
     }
 
-    case SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST):
+    case SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST):
       return {
         ...state,
         measureEntries: action.payload.data,
@@ -94,7 +94,7 @@ export default (state: ManageContainerState = initialState, action): ManageConta
       };
 
     case FAILURE(ACTION_TYPES.FETCH_CONTAINER_LIST):
-    case FAILURE(ACTION_TYPES.FETCH_MEASUREENTRY_LIST):
+    case FAILURE(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST):
     case FAILURE(ACTION_TYPES.FETCH_MEASURE_ENTRIES_WITH_CURRENT_CONTAINERS):
     case FAILURE(ACTION_TYPES.CREATE_MEASURE_ENTRY):
     case FAILURE(ACTION_TYPES.UPDATE_MEASURE_ENTRIES):
@@ -131,7 +131,7 @@ export const hideAddMeasureModal = () => ({
 });
 
 export const getMeasureEntries: ICrudGetAllAction<IMeasureEntry> = () => ({
-  type: ACTION_TYPES.FETCH_MEASUREENTRY_LIST,
+  type: ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST,
   payload: axios.get<IMeasureEntry>(`${apiMeasureEntries}?cacheBuster=${new Date().getTime()}`),
 });
 

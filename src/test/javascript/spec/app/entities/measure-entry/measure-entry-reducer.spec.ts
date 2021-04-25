@@ -60,7 +60,7 @@ describe('Entities reducer tests', () => {
 
   describe('Requests', () => {
     it('should set state to loading', () => {
-      testMultipleTypes([REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY_LIST), REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY)], {}, state => {
+      testMultipleTypes([REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST), REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY)], {}, state => {
         expect(state).toMatchObject({
           errorMessage: null,
           updateSuccess: false,
@@ -71,7 +71,11 @@ describe('Entities reducer tests', () => {
 
     it('should set state to updating', () => {
       testMultipleTypes(
-        [REQUEST(ACTION_TYPES.CREATE_MEASUREENTRY), REQUEST(ACTION_TYPES.UPDATE_MEASUREENTRY), REQUEST(ACTION_TYPES.DELETE_MEASUREENTRY)],
+        [
+          REQUEST(ACTION_TYPES.CREATE_MEASURE_ENTRY),
+          REQUEST(ACTION_TYPES.UPDATE_MEASURE_ENTRY),
+          REQUEST(ACTION_TYPES.DELETE_MEASURE_ENTRY),
+        ],
         {},
         state => {
           expect(state).toMatchObject({
@@ -101,11 +105,11 @@ describe('Entities reducer tests', () => {
     it('should set a message in errorMessage', () => {
       testMultipleTypes(
         [
-          FAILURE(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
-          FAILURE(ACTION_TYPES.FETCH_MEASUREENTRY),
-          FAILURE(ACTION_TYPES.CREATE_MEASUREENTRY),
-          FAILURE(ACTION_TYPES.UPDATE_MEASUREENTRY),
-          FAILURE(ACTION_TYPES.DELETE_MEASUREENTRY),
+          FAILURE(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
+          FAILURE(ACTION_TYPES.FETCH_MEASURE_ENTRY),
+          FAILURE(ACTION_TYPES.CREATE_MEASURE_ENTRY),
+          FAILURE(ACTION_TYPES.UPDATE_MEASURE_ENTRY),
+          FAILURE(ACTION_TYPES.DELETE_MEASURE_ENTRY),
         ],
         'error message',
         state => {
@@ -124,7 +128,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: [{ 1: 'fake1' }, { 2: 'fake2' }] };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
           payload,
         })
       ).toEqual({
@@ -138,7 +142,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: { 1: 'fake1' } };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY),
           payload,
         })
       ).toEqual({
@@ -152,7 +156,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: 'fake payload' };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.CREATE_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.CREATE_MEASURE_ENTRY),
           payload,
         })
       ).toEqual({
@@ -166,7 +170,7 @@ describe('Entities reducer tests', () => {
     it('should delete entity', () => {
       const payload = 'fake payload';
       const toTest = reducer(undefined, {
-        type: SUCCESS(ACTION_TYPES.DELETE_MEASUREENTRY),
+        type: SUCCESS(ACTION_TYPES.DELETE_MEASURE_ENTRY),
         payload,
       });
       expect(toTest).toMatchObject({
@@ -192,10 +196,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.FETCH_MEASUREENTRY_LIST actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
           payload: resolvedObject,
         },
       ];
@@ -205,10 +209,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.FETCH_MEASUREENTRY actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY),
           payload: resolvedObject,
         },
       ];
@@ -218,17 +222,17 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.CREATE_MEASUREENTRY actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.CREATE_MEASUREENTRY),
+          type: REQUEST(ACTION_TYPES.CREATE_MEASURE_ENTRY),
         },
         {
-          type: SUCCESS(ACTION_TYPES.CREATE_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.CREATE_MEASURE_ENTRY),
           payload: resolvedObject,
         },
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
           payload: resolvedObject,
         },
       ];
@@ -238,10 +242,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.UPDATE_MEASUREENTRY actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.UPDATE_MEASUREENTRY),
+          type: REQUEST(ACTION_TYPES.UPDATE_MEASURE_ENTRY),
         },
         {
-          type: SUCCESS(ACTION_TYPES.UPDATE_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.UPDATE_MEASURE_ENTRY),
           payload: resolvedObject,
         },
       ];
@@ -251,17 +255,17 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.DELETE_MEASUREENTRY actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.DELETE_MEASUREENTRY),
+          type: REQUEST(ACTION_TYPES.DELETE_MEASURE_ENTRY),
         },
         {
-          type: SUCCESS(ACTION_TYPES.DELETE_MEASUREENTRY),
+          type: SUCCESS(ACTION_TYPES.DELETE_MEASURE_ENTRY),
           payload: resolvedObject,
         },
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREENTRY_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_ENTRY_LIST),
           payload: resolvedObject,
         },
       ];

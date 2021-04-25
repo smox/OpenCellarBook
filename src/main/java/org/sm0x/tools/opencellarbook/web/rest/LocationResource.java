@@ -8,6 +8,7 @@ import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sm0x.tools.opencellarbook.web.rest.errors.ErrorConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +56,7 @@ public class LocationResource {
         }
         Location result = locationRepository.save(location);
         return ResponseEntity.created(new URI("/api/locations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, getHeaderParam(result)))
             .body(result);
     }
 
@@ -70,14 +72,24 @@ public class LocationResource {
     @PutMapping("/locations")
     public ResponseEntity<Location> updateLocation(@RequestBody Location location) throws URISyntaxException {
         log.debug("REST request to update Location : {}", location);
+
         if (location.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        Optional<Location> foundLocation = locationRepository.findById(location.getId());
+        if(!foundLocation.isPresent()) {
+            throw new BadRequestAlertException("Cannot update deleted entity", ENTITY_NAME, "entityAlreadyDeleted");
+        }
+
         Location result = locationRepository.save(location);
-        String param = "".equals(location.getName().trim()) ? location.getId().toString() : location.getName();
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, param))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, getHeaderParam(location)))
             .body(result);
+    }
+
+    public String getHeaderParam(Location location) {
+        return "".equals(location.getName().trim()) ? location.getId().toString() : location.getName();
     }
 
     /**
@@ -113,7 +125,18 @@ public class LocationResource {
     @DeleteMapping("/locations/{id}")
     public ResponseEntity<Void> deleteLocation(@PathVariable Long id) {
         log.debug("REST request to delete Location : {}", id);
-        locationRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+
+        Optional<Location> locationToDelete = locationRepository.findById(id);
+        if(locationToDelete.isPresent()) {
+            locationToDelete.get().setDeletedAt(LocalDate.now());
+            locationRepository.save(locationToDelete.get());
+            log.debug("REST request: Location {} deleted", id);
+            return ResponseEntity.noContent().headers(
+                HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, getHeaderParam(locationToDelete.get()))).build();
+        }
+
+        return ResponseEntity.notFound().headers(
+            HeaderUtil.createFailureAlert(applicationName, true, ENTITY_NAME, ErrorConstants.ERR_VALIDATION, "Entity not found")
+        ).build();
     }
 }

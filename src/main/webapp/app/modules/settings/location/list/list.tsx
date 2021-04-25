@@ -3,25 +3,26 @@ import { Translate, translate } from 'react-jhipster';
 import { connect } from 'react-redux';
 import { Button, Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getEntities as getLocations } from 'app/entities/location/location.reducer';
+import { getEntities as getLocations, deleteEntity as deleteLocation } from 'app/entities/location/location.reducer';
 import { Link } from 'react-router-dom';
+
 
 export interface ISettingsLocationsListProp extends StateProps, DispatchProps {}
 
 
 
 export const SettingsLocationsList = (props: ISettingsLocationsListProp) => {
-  const { account, locations, loading } = props;
+  const { locations, loading } = props;
 
   useEffect(() => {
     props.getLocations();
   }, []);
 
-  return (  
+  return (
       <>
         <h2 id="location-heading">
         <Translate contentKey="openCellarBookApp.location.home.title">Locations</Translate>
-        <Button onClick={ () => undefined } color="primary" className="float-right" size="sm" disabled>
+        <Button tag={Link} to={`/settings/location/add/` } color="primary" className="float-right" size="sm">
           <FontAwesomeIcon icon="plus" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="openCellarBookApp.location.home.createLabel">Create new Location</Translate>
@@ -57,7 +58,7 @@ export const SettingsLocationsList = (props: ISettingsLocationsListProp) => {
                             <Translate contentKey="entity.action.edit">Edit</Translate>
                           </span>
                         </Button>
-                        <Button onClick={ () => undefined } color="danger" size="sm" disabled>
+                        <Button tag={Link} to={`/settings/location/delete/${location.id}`} color="danger" size="sm">
                           <FontAwesomeIcon icon="trash" />{' '}
                           <span className="d-none d-md-inline">
                             <Translate contentKey="entity.action.delete">Delete</Translate>
@@ -89,7 +90,8 @@ const mapStateToProps = storeState => ({
 });
 
 const mapDispatchToProps = {
-  getLocations
+  getLocations,
+  deleteLocation
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
