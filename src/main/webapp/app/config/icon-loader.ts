@@ -25,6 +25,7 @@ import { faFlag } from '@fortawesome/free-solid-svg-icons/faFlag';
 import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
 import { faWineBottle } from '@fortawesome/free-solid-svg-icons/faWineBottle';
+import { faGlassCheers } from '@fortawesome/free-solid-svg-icons/faGlassCheers';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
@@ -33,13 +34,11 @@ import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faWineGlass } from '@fortawesome/free-solid-svg-icons/faWineGlass';
 import { faWineGlassAlt } from '@fortawesome/free-solid-svg-icons/faWineGlassAlt';
-import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt';
 import { faGlassWhiskey } from '@fortawesome/free-solid-svg-icons/faGlassWhiskey';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe';
 import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons/faClipboardCheck';
 import { faFlask } from '@fortawesome/free-solid-svg-icons/faFlask';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
-import {faPrint} from "@fortawesome/free-solid-svg-icons/faPrint";
+import { faPrint } from '@fortawesome/free-solid-svg-icons/faPrint';
 
 export const loadIcons = () => {
   library.add(
@@ -74,6 +73,7 @@ export const loadIcons = () => {
     faTimesCircle,
     faSearch,
     faWineBottle,
+    faGlassCheers,
     faWineGlass,
     faWineGlassAlt,
     faWrench,

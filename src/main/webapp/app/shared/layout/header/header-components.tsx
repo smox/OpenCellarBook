@@ -8,18 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import appConfig from 'app/config/constants';
 import {NavDropdown} from "app/shared/layout/menus/menu-components";
 import MenuItem from "app/shared/layout/menus/menu-item";
-import {faGlassWhiskey} from "@fortawesome/free-solid-svg-icons/faGlassWhiskey";
-import {faClipboardCheck} from "@fortawesome/free-solid-svg-icons/faClipboardCheck";
 
 export const BrandIcon = props => (
   <div {...props} className="brand-icon">
-    <img src="content/images/logo-jhipster.png" alt="Logo" />
+    <FontAwesomeIcon icon={ "glass-cheers" } size={"2x"} />
   </div>
 );
 
-export const Brand = props => (
+export const Brand = () => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
-    <BrandIcon />
+    <BrandIcon />&nbsp;
     <span className="brand-title">
       <Translate contentKey="global.title">OpenCellarBook</Translate>
     </span>
@@ -27,7 +25,7 @@ export const Brand = props => (
   </NavbarBrand>
 );
 
-export const Home = props => (
+export const Home = () => (
   <NavItem>
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
       <FontAwesomeIcon icon="home" />&nbsp;
@@ -38,7 +36,7 @@ export const Home = props => (
   </NavItem>
 );
 
-export const ManageContainers = props => (
+export const ManageContainers = () => (
   <NavItem>
     <NavLink tag={Link} to="/manage-containers" className="d-flex align-items-center">
       <FontAwesomeIcon icon="wine-glass-alt" />&nbsp;
@@ -49,7 +47,7 @@ export const ManageContainers = props => (
   </NavItem>
 );
 
-export const Reports = props => (
+export const Reports = () => (
   <NavItem>
     <NavLink tag={Link} to="/reports" className="d-flex align-items-center">
       <FontAwesomeIcon icon="clipboard-check" />&nbsp;
@@ -61,7 +59,7 @@ export const Reports = props => (
 );
 
 
-export const Settings = props => (
+export const Settings = () => (
   <NavDropdown
     icon="wrench"
     name={translate('global.menu.settings')}
