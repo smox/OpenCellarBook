@@ -43,7 +43,7 @@ const SettingsLocationDetailModal = (props: ISettingsLocationDetailModalProps) =
       const entityToSubmit = {
         id: Number(id),
         name: form["name"],
-        orderNumber: form["ordnerNumber"]
+        orderNumber: form["orderNumber"]
       };
 
       if(isNew) {

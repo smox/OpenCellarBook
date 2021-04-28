@@ -48,7 +48,7 @@ export const SettingsLocationsList = (props: ISettingsLocationsListProp) => {
               <tbody>
                 {locations.map((location, i) => (
                   <tr key={`entity-${i}`}>
-                    <td>{location.orderNumber ? location.ordnerNumber : translate('global.messages.info.orderNumber.notFound') }</td>
+                    <td>{location.orderNumber ? location.orderNumber : translate('global.messages.info.orderNumber.notFound') }</td>
                     <td>{location.name}</td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
