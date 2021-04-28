@@ -5,7 +5,6 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { ILocation, defaultValue } from 'app/shared/model/location.model';
-import { EntitiesMenu } from 'app/shared/layout/menus';
 
 export const ACTION_TYPES = {
   FETCH_LOCATION_LIST: 'location/FETCH_LOCATION_LIST',
@@ -75,6 +74,13 @@ export default (state: LocationState = initialState, action): LocationState => {
         entity: action.payload.data,
       };
     case SUCCESS(ACTION_TYPES.CREATE_LOCATION):
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        entity: action.payload.data,
+        entities: [...state.entities, action.payload.data],
+      };
     case SUCCESS(ACTION_TYPES.UPDATE_LOCATION):
       return {
         ...state,
@@ -141,7 +147,6 @@ export const createEntity: ICrudPutAction<ILocation> = entity => async dispatch 
     type: ACTION_TYPES.CREATE_LOCATION,
     payload: axios.post(apiUrl, cleanEntity(entity)),
   });
-  dispatch(getEntities());
   return result;
 };
 
