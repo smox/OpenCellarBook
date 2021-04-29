@@ -1,6 +1,7 @@
 package org.sm0x.tools.opencellarbook.web.rest;
 
 import org.sm0x.tools.opencellarbook.domain.Container;
+import org.sm0x.tools.opencellarbook.domain.Location;
 import org.sm0x.tools.opencellarbook.repository.ContainerRepository;
 import org.sm0x.tools.opencellarbook.web.rest.errors.BadRequestAlertException;
 
@@ -8,6 +9,7 @@ import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sm0x.tools.opencellarbook.web.rest.errors.ErrorConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +57,7 @@ public class ContainerResource {
         }
         Container result = containerRepository.save(container);
         return ResponseEntity.created(new URI("/api/containers/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, getHeaderParam(result)))
             .body(result);
     }
 
@@ -73,9 +76,15 @@ public class ContainerResource {
         if (container.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        Optional<Container> found = containerRepository.findById(container.getId());
+        if(!found.isPresent()) {
+            throw new BadRequestAlertException("Cannot update deleted entity", ENTITY_NAME, "entityAlreadyDeleted");
+        }
+
         Container result = containerRepository.save(container);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, container.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, getHeaderParam(container)))
             .body(result);
     }
 
@@ -88,6 +97,10 @@ public class ContainerResource {
     public List<Container> getAllContainers() {
         log.debug("REST request to get all Containers");
         return containerRepository.findAll();
+    }
+
+    public String getHeaderParam(Container container) {
+        return "".equals(container.getName().trim()) ? container.getId().toString() : container.getName();
     }
 
     /**
@@ -112,7 +125,17 @@ public class ContainerResource {
     @DeleteMapping("/containers/{id}")
     public ResponseEntity<Void> deleteContainer(@PathVariable Long id) {
         log.debug("REST request to delete Container : {}", id);
-        containerRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
+
+        Optional<Container> toDelete = containerRepository.findById(id);
+        if(toDelete.isPresent()) {
+            toDelete.get().setDeletedAt(LocalDate.now());
+            containerRepository.save(toDelete.get());
+            log.debug("REST request: Container {} deleted", id);
+            return ResponseEntity.noContent().headers(
+                HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, getHeaderParam(toDelete.get()))).build();
+        }
+
+        return ResponseEntity.notFound().headers(
+            HeaderUtil.createFailureAlert(applicationName, true, ENTITY_NAME, ErrorConstants.ERR_VALIDATION, "Entity not found")
+        ).build();    }
 }

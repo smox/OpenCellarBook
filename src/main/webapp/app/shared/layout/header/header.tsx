@@ -51,7 +51,6 @@ const Header = (props: IHeaderProps) => {
             {props.isAuthenticated && props.isAdmin && (
               <AdminMenu showSwagger={props.isSwaggerEnabled} showDatabase={!props.isInProduction} />
             )}
-            { /* <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} /> */ }
             <AccountMenu isAuthenticated={props.isAuthenticated} />
           </Nav>
         </Collapse>

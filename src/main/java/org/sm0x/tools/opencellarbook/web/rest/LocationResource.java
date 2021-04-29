@@ -88,10 +88,6 @@ public class LocationResource {
             .body(result);
     }
 
-    public String getHeaderParam(Location location) {
-        return "".equals(location.getName().trim()) ? location.getId().toString() : location.getName();
-    }
-
     /**
      * {@code GET  /locations} : get all the locations.
      *
@@ -101,6 +97,10 @@ public class LocationResource {
     public List<Location> getAllLocations() {
         log.debug("REST request to get all Locations");
         return locationRepository.findAll();
+    }
+
+    public String getHeaderParam(Location location) {
+        return "".equals(location.getName().trim()) ? location.getId().toString() : location.getName();
     }
 
     /**

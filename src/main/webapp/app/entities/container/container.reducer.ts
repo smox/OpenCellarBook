@@ -13,6 +13,7 @@ export const ACTION_TYPES = {
   UPDATE_CONTAINER: 'container/UPDATE_CONTAINER',
   DELETE_CONTAINER: 'container/DELETE_CONTAINER',
   SET_BLOB: 'container/SET_BLOB',
+  SET_CONTAINER: 'container/SET_CONTAINER',
   RESET: 'container/RESET',
 };
 
@@ -73,12 +74,23 @@ export default (state: ContainerState = initialState, action): ContainerState =>
         entity: action.payload.data,
       };
     case SUCCESS(ACTION_TYPES.CREATE_CONTAINER):
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        entity: action.payload.data,
+        entities: [...state.entities, action.payload.data],
+      };
     case SUCCESS(ACTION_TYPES.UPDATE_CONTAINER):
       return {
         ...state,
         updating: false,
         updateSuccess: true,
         entity: action.payload.data,
+        entities: state.entities.reduce(
+          (prev, curr) => (curr.id === action.payload.data.id ? [...prev, action.payload.data] : [...prev, curr]),
+          []
+        ),
       };
     case SUCCESS(ACTION_TYPES.DELETE_CONTAINER):
       return {
@@ -96,6 +108,12 @@ export default (state: ContainerState = initialState, action): ContainerState =>
           [name]: data,
           [name + 'ContentType']: contentType,
         },
+      };
+    }
+    case ACTION_TYPES.SET_CONTAINER: {
+      return {
+        ...state,
+        entity: action.payload,
       };
     }
     case ACTION_TYPES.RESET:
@@ -129,7 +147,6 @@ export const createEntity: ICrudPutAction<IContainer> = entity => async dispatch
     type: ACTION_TYPES.CREATE_CONTAINER,
     payload: axios.post(apiUrl, cleanEntity(entity)),
   });
-  dispatch(getEntities());
   return result;
 };
 
@@ -158,6 +175,11 @@ export const setBlob = (name, data, contentType?) => ({
     data,
     contentType,
   },
+});
+
+export const setEntity = (container: IContainer) => ({
+  type: ACTION_TYPES.SET_CONTAINER,
+  payload: container,
 });
 
 export const reset = () => ({

@@ -161,7 +161,7 @@ export const ManageContainersPage = (props: IManageContainersProps) => {
           </div>
           ) : !props.loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="openCellarBookApp.container.home.notFound">No Containers found</Translate>
+              <Translate contentKey="openCellarBookApp.container.home.notFoundChangeIt">No Containers found</Translate>
             </div>
           )
       }

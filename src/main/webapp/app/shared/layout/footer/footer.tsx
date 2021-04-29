@@ -1,16 +1,16 @@
 import './footer.scss';
 
 import React from 'react';
-import { Translate } from 'react-jhipster';
 import { Col, Row } from 'reactstrap';
 
-const Footer = props => (
+const Footer = () => (
   <div className="footer page-content">
     <Row>
-      <Col md="12">
-        <p>
-          <Translate contentKey="footer">Your footer</Translate>
-        </p>
+      <Col sm="12" md="6">
+        <div>Icons made by&nbsp;
+          <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from&nbsp;
+          <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </div>
       </Col>
     </Row>
   </div>

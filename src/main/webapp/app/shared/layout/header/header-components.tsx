@@ -39,7 +39,7 @@ export const Home = () => (
 export const ManageContainers = () => (
   <NavItem>
     <NavLink tag={Link} to="/manage-containers" className="d-flex align-items-center">
-      <FontAwesomeIcon icon="wine-glass-alt" />&nbsp;
+      <img style={ { height: "15px", width:"15px", filter: "invert(1)", marginRight: "2px" } } src={ `/content/images/021-fermentation.svg` } />
       <span>
         <Translate contentKey="global.menu.manage-containers">Manage Containers</Translate>
       </span>
@@ -66,7 +66,7 @@ export const Settings = () => (
     id="entity-menu"
     style={{ maxHeight: '80vh', overflow: 'auto' }}
   >
-    <MenuItem icon="glass-whiskey" to="/settings/containers">
+    <MenuItem smashIcon={ { name: "027-grapes.svg"} } to="/settings/container">
       <Translate contentKey="global.menu.entities.container" />
     </MenuItem>
     <MenuItem icon="globe-europe" to="/settings/location">

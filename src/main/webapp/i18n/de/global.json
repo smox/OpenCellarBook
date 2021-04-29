@@ -5,15 +5,15 @@
     "menu": {
       "home": "Startseite",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
-      "manage-containers": "Tanks verwalten",
+      "manage-containers": "Keller verwalten",
       "reports": "Berichte",
       "bottled": "Abfüllungen",
       "settings": "Einstellungen",
       "entities": {
         "main": "Entitäten",
-        "container": "Fäßer",
+        "container": "Fässer",
         "location": "Standorte",
-        "containerType": "Faßarten",
+        "containerType": "Fassarten",
         "measureType": "Maßnahmen",
         "measurePropertyType": "Eigenschaftstypen",
         "measurePropertyValue": "Eigenschaftswerte",
@@ -83,6 +83,10 @@
           "notFound": "Keine Reihenfolge festgelegt"
         }
       },
+      "answers": {
+        "yes": "Ja",
+        "no": "Nein"
+      },
       "error": {
         "dontmatch": "Das bestätigte Passwort entspricht nicht dem neuen Passwort!"
       },
@@ -103,6 +107,11 @@
           "invalid": "Ihre Email Adresse ist ungültig.",
           "minlength": "Ihre Email Adresse muss mindestens 5 Zeichen lang sein",
           "maxlength": "Ihre Email Adresse darf nicht länger als 50 Zeichen sein"
+        },
+        "forms": {
+          "min": "Der eingegebene Wert muss größer als {{ value }} sein",
+          "max": "Der eingegebene Wert muss kleiner als {{ value }} sein",
+          "required": "Dieses Feld ist ein Pflichtfeld"
         }
       }
     },
@@ -129,7 +138,8 @@
       "save": "Speichern",
       "view": "Details",
       "print": "Drucken",
-      "createReport": "Erzeuge Bericht"
+      "createReport": "Erzeuge Bericht",
+      "new": "Neu"
     },
     "detail": {
       "field": "Feld",
