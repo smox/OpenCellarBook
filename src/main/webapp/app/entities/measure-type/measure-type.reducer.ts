@@ -2,9 +2,12 @@ import axios from 'axios';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
+import { getEntitiesByMeasureTypes as getPropertyTypesByMeasureTypes } from 'app/entities/measure-property-type/measure-property-type.reducer';
+
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IMeasureType, defaultValue } from 'app/shared/model/measure-type.model';
+import { ILocation } from 'app/shared/model/location.model';
 
 export const ACTION_TYPES = {
   FETCH_MEASURETYPE_LIST: 'measureType/FETCH_MEASURETYPE_LIST',
@@ -12,6 +15,7 @@ export const ACTION_TYPES = {
   CREATE_MEASURETYPE: 'measureType/CREATE_MEASURETYPE',
   UPDATE_MEASURETYPE: 'measureType/UPDATE_MEASURETYPE',
   DELETE_MEASURETYPE: 'measureType/DELETE_MEASURETYPE',
+  SET_MEASURE_TYPE: 'measureType/SET_MEASURE_TYPE',
   SET_BLOB: 'measureType/SET_BLOB',
   RESET: 'measureType/RESET',
 };
@@ -98,6 +102,12 @@ export default (state: MeasureTypeState = initialState, action): MeasureTypeStat
         },
       };
     }
+    case ACTION_TYPES.SET_MEASURE_TYPE: {
+      return {
+        ...state,
+        entity: action.payload,
+      };
+    }
     case ACTION_TYPES.RESET:
       return {
         ...initialState,
@@ -159,6 +169,16 @@ export const setBlob = (name, data, contentType?) => ({
     contentType,
   },
 });
+
+export const setEntity = (location: ILocation) => ({
+  type: ACTION_TYPES.SET_MEASURE_TYPE,
+  payload: location,
+});
+
+export const getEntitiesWithPossiblePropertyTypes = () => async dispatch => {
+  const entities = await getEntities();
+  const propertytypes = await getPropertyTypesByMeasureTypes();
+};
 
 export const reset = () => ({
   type: ACTION_TYPES.RESET,

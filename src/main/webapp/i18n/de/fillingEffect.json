@@ -2,10 +2,10 @@
   "openCellarBookApp": {
     "FillingEffect": {
       "null": "",
-      "NO_EFFECT": "NO_EFFECT",
-      "REFILL": "REFILL",
-      "TRANSFILL": "TRANSFILL",
-      "BOTTLED": "BOTTLED"
+      "NO_EFFECT": "Keine Auswirkung",
+      "REFILL": "Auffüllend",
+      "TRANSFILL": "Umfüllend",
+      "BOTTLED": "Abfüllend"
     }
   }
 }

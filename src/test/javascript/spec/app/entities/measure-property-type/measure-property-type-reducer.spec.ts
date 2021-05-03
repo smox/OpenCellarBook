@@ -61,7 +61,7 @@ describe('Entities reducer tests', () => {
   describe('Requests', () => {
     it('should set state to loading', () => {
       testMultipleTypes(
-        [REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST), REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE)],
+        [REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST), REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE)],
         {},
         state => {
           expect(state).toMatchObject({
@@ -76,9 +76,9 @@ describe('Entities reducer tests', () => {
     it('should set state to updating', () => {
       testMultipleTypes(
         [
-          REQUEST(ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE),
-          REQUEST(ACTION_TYPES.UPDATE_MEASUREPROPERTYTYPE),
-          REQUEST(ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE),
+          REQUEST(ACTION_TYPES.CREATE_MEASURE_PROPERTY_TYPE),
+          REQUEST(ACTION_TYPES.UPDATE_MEASURE_PROPERTY_TYPE),
+          REQUEST(ACTION_TYPES.DELETE_MEASURE_PROPERTY_TYPE),
         ],
         {},
         state => {
@@ -109,11 +109,11 @@ describe('Entities reducer tests', () => {
     it('should set a message in errorMessage', () => {
       testMultipleTypes(
         [
-          FAILURE(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
-          FAILURE(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE),
-          FAILURE(ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE),
-          FAILURE(ACTION_TYPES.UPDATE_MEASUREPROPERTYTYPE),
-          FAILURE(ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE),
+          FAILURE(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
+          FAILURE(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE),
+          FAILURE(ACTION_TYPES.CREATE_MEASURE_PROPERTY_TYPE),
+          FAILURE(ACTION_TYPES.UPDATE_MEASURE_PROPERTY_TYPE),
+          FAILURE(ACTION_TYPES.DELETE_MEASURE_PROPERTY_TYPE),
         ],
         'error message',
         state => {
@@ -132,7 +132,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: [{ 1: 'fake1' }, { 2: 'fake2' }] };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
           payload,
         })
       ).toEqual({
@@ -146,7 +146,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: { 1: 'fake1' } };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE),
           payload,
         })
       ).toEqual({
@@ -160,7 +160,7 @@ describe('Entities reducer tests', () => {
       const payload = { data: 'fake payload' };
       expect(
         reducer(undefined, {
-          type: SUCCESS(ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.CREATE_MEASURE_PROPERTY_TYPE),
           payload,
         })
       ).toEqual({
@@ -174,7 +174,7 @@ describe('Entities reducer tests', () => {
     it('should delete entity', () => {
       const payload = 'fake payload';
       const toTest = reducer(undefined, {
-        type: SUCCESS(ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE),
+        type: SUCCESS(ACTION_TYPES.DELETE_MEASURE_PROPERTY_TYPE),
         payload,
       });
       expect(toTest).toMatchObject({
@@ -200,10 +200,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
           payload: resolvedObject,
         },
       ];
@@ -213,10 +213,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE),
           payload: resolvedObject,
         },
       ];
@@ -226,17 +226,17 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE),
+          type: REQUEST(ACTION_TYPES.CREATE_MEASURE_PROPERTY_TYPE),
         },
         {
-          type: SUCCESS(ACTION_TYPES.CREATE_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.CREATE_MEASURE_PROPERTY_TYPE),
           payload: resolvedObject,
         },
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
           payload: resolvedObject,
         },
       ];
@@ -246,10 +246,10 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.UPDATE_MEASUREPROPERTYTYPE actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.UPDATE_MEASUREPROPERTYTYPE),
+          type: REQUEST(ACTION_TYPES.UPDATE_MEASURE_PROPERTY_TYPE),
         },
         {
-          type: SUCCESS(ACTION_TYPES.UPDATE_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.UPDATE_MEASURE_PROPERTY_TYPE),
           payload: resolvedObject,
         },
       ];
@@ -259,17 +259,17 @@ describe('Entities reducer tests', () => {
     it('dispatches ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE),
+          type: REQUEST(ACTION_TYPES.DELETE_MEASURE_PROPERTY_TYPE),
         },
         {
-          type: SUCCESS(ACTION_TYPES.DELETE_MEASUREPROPERTYTYPE),
+          type: SUCCESS(ACTION_TYPES.DELETE_MEASURE_PROPERTY_TYPE),
           payload: resolvedObject,
         },
         {
-          type: REQUEST(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: REQUEST(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
         },
         {
-          type: SUCCESS(ACTION_TYPES.FETCH_MEASUREPROPERTYTYPE_LIST),
+          type: SUCCESS(ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST),
           payload: resolvedObject,
         },
       ];

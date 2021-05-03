@@ -54,13 +54,14 @@ const SettingsContainerDetailModal = (props: ISettingsContainerDetailModalProps)
 
       const entityToSubmit = {
         id: Number(id),
-          name: form["name"],
+        name: form["name"],
         orderNumber: form["orderNumber"],
         isAlwaysFull: form["isAlwaysFull"],
         capacity: form["capacity"],
-        location: form["location"]?.id !== 0 ? locations.filter(l => l.id == form["location"].id)[0] : undefined,
-        containerType:
-          form["containerType"]?.id !== 0 ? containerTypes.filter(c => c.id == form["containerType"].id)[0] : undefined,
+        location: form["location"]?.id !== 0 ?
+          locations.filter(l => l.id === form["location"].id)[0] : undefined,
+        containerType: form["containerType"]?.id !== 0 ?
+          containerTypes.filter(c => c.id === form["containerType"].id)[0] : undefined,
       };
 
       if(isNew) {
@@ -87,9 +88,6 @@ const SettingsContainerDetailModal = (props: ISettingsContainerDetailModalProps)
                     <AvField name="name" label={translate("openCellarBookApp.container.name")} required
                              errorMessage = { translate('global.messages.validate.forms.required') } />
                     <AvField name="isAlwaysFull" label={translate("openCellarBookApp.container.isAlwaysFull")} type="checkbox" />
-                    {
-                      // validation fehlt min, req
-                    }
                     <AvField name="capacity" label={translate("openCellarBookApp.container.capacity")}
                              type="number" min={ 1 }
                       validate={{

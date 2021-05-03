@@ -1,5 +1,6 @@
 package org.sm0x.tools.opencellarbook.web.rest;
 
+import org.sm0x.tools.opencellarbook.domain.Location;
 import org.sm0x.tools.opencellarbook.domain.MeasureType;
 import org.sm0x.tools.opencellarbook.repository.MeasureTypeRepository;
 import org.sm0x.tools.opencellarbook.web.rest.errors.BadRequestAlertException;
@@ -8,6 +9,7 @@ import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sm0x.tools.opencellarbook.web.rest.errors.ErrorConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +57,7 @@ public class MeasureTypeResource {
         }
         MeasureType result = measureTypeRepository.save(measureType);
         return ResponseEntity.created(new URI("/api/measure-types/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, getHeaderParam(result)))
             .body(result);
     }
 
@@ -73,9 +76,15 @@ public class MeasureTypeResource {
         if (measureType.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+
+        Optional<MeasureType> found = measureTypeRepository.findById(measureType.getId());
+        if(!found.isPresent()) {
+            throw new BadRequestAlertException("Cannot update deleted entity", ENTITY_NAME, "entityAlreadyDeleted");
+        }
+
         MeasureType result = measureTypeRepository.save(measureType);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, measureType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, getHeaderParam(result)))
             .body(result);
     }
 
@@ -88,6 +97,10 @@ public class MeasureTypeResource {
     public List<MeasureType> getAllMeasureTypes() {
         log.debug("REST request to get all MeasureTypes");
         return measureTypeRepository.findAll();
+    }
+
+    public String getHeaderParam(MeasureType measureType) {
+        return "".equals(measureType.getName().trim()) ? measureType.getId().toString() : measureType.getName();
     }
 
     /**
@@ -112,7 +125,18 @@ public class MeasureTypeResource {
     @DeleteMapping("/measure-types/{id}")
     public ResponseEntity<Void> deleteMeasureType(@PathVariable Long id) {
         log.debug("REST request to delete MeasureType : {}", id);
-        measureTypeRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+
+        Optional<MeasureType> toDelete = measureTypeRepository.findById(id);
+        if(toDelete.isPresent()) {
+            toDelete.get().setDeletedAt(LocalDate.now());
+            measureTypeRepository.save(toDelete.get());
+            log.debug("REST request: Location {} deleted", id);
+            return ResponseEntity.noContent().headers(
+                HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, getHeaderParam(toDelete.get()))).build();
+        }
+
+        return ResponseEntity.notFound().headers(
+            HeaderUtil.createFailureAlert(applicationName, true, ENTITY_NAME, ErrorConstants.ERR_VALIDATION, "Entity not found")
+        ).build();
     }
 }

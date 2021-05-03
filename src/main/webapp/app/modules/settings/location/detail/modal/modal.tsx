@@ -59,19 +59,19 @@ const SettingsLocationDetailModal = (props: ISettingsLocationDetailModalProps) =
 
     return (
       <Modal isOpen={true} backdrop="static" id="settings-location-detail-modal" autoFocus={true}>
-        <AvForm onValidSubmit={ handleValidSubmit } model={defaultValues}>
+        <AvForm onValidSubmit={ handleValidSubmit } model={ defaultValues }>
           <ModalHeader>
             <Translate contentKey={ props.match.params.id ? "openCellarBookApp.location.home.editLabel" : "openCellarBookApp.location.home.createLabel" } />
           </ModalHeader>
-            <ModalBody>
-              { !loading ? (
-                  <>
-                    <AvField name="orderNumber" label={translate("openCellarBookApp.location.orderNumber")} type="number" />
-                    <AvField name="name" label={translate("openCellarBookApp.location.name")} required />
-                  </>
-                ) : ( <p>{ translate("global.messages.info.entity.loading", { entity: translate("openCellarBookApp.location.designation") }) }</p> )
-              }
-            </ModalBody>
+          <ModalBody>
+            { !loading ? (
+                <>
+                  <AvField name="orderNumber" label={ translate("openCellarBookApp.location.orderNumber") } type="number" />
+                  <AvField name="name" label={ translate("openCellarBookApp.location.name") } required />
+                </>
+              ) : ( <p>{ translate("global.messages.info.entity.loading", { entity: translate("openCellarBookApp.location.designation") }) }</p> )
+            }
+          </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={ props.history.goBack } tabIndex="1">
               <Translate contentKey="entity.action.back">Back</Translate>

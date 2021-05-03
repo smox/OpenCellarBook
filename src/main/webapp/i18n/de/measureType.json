@@ -2,31 +2,34 @@
   "openCellarBookApp": {
     "measureType": {
       "home": {
-        "title": "Measure Types",
-        "createLabel": "Measure Type erstellen",
-        "createOrEditLabel": "Measure Type erstellen oder bearbeiten",
-        "notFound": "No Measure Types found"
+        "title": "Maßnahmen",
+        "createLabel": "Maßnahme erstellen",
+        "createOrEditLabel": "Maßnahme erstellen oder bearbeiten",
+        "notFound": "Keine Maßnahmen gefunden"
       },
-      "created": "Measure Type erstellt mit ID {{ param }}",
-      "updated": "Measure Type aktualisiert mit ID {{ param }}",
-      "deleted": "Measure Type gelöscht mit ID {{ param }}",
+      "created": "Maßnahme {{ param }} erstellt",
+      "updated": "Maßnahme {{ param }} bearbeitet",
+      "deleted": "Maßnahme {{ param }} gelöscht",
       "delete": {
-        "question": "Soll Measure Type {{ id }} wirklich dauerhaft gelöscht werden?"
+        "header": "Maßnahme löschen",
+        "question": "Soll Maßnahme {{ id }} wirklich dauerhaft gelöscht werden?",
+        "action": "Löschen"
       },
       "detail": {
-        "title": "Measure Type"
+        "title": "Maßnahmen"
       },
       "name": "Name",
-      "fillingEffect": "Filling Effect",
-      "orderNumber": "Order Number",
-      "color": "Color",
+      "fillingEffect": "Maßnahmenereignis",
+      "orderNumber": "Reihenfolge",
+      "color": "Farbe",
       "icon": "Icon",
-      "deletedAt": "Deleted At",
-      "measureEntry": "Measure Entry",
-      "possiblePTypesForMTypes": "Possible P Types For M Types",
-      "children": "Children",
-      "parent": "Parent",
-      "measureTypeGroup": "Measure Type Group"
+      "deletedAt": "Gelöscht am",
+      "measureEntry": "Maßnahmeneintrag",
+      "possiblePTypesForMTypes": "Maßnahmeneigenschaften",
+      "children": "Kindobjekte",
+      "parent": "Vaterobjekt",
+      "measureTypeGroup": "Maßnahmengruppe",
+      "actions": "Aktionen"
     }
   }
 }

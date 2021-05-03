@@ -23,5 +23,4 @@ public interface ContainerRepository extends JpaRepository<Container, Long> {
     @Query("SELECT c FROM Container c WHERE c.deletedAt is null AND c.id = :id")
     Optional<Container> findById(@Param("id") Long id);
 
-
 }

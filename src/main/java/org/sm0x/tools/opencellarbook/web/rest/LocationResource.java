@@ -84,7 +84,7 @@ public class LocationResource {
 
         Location result = locationRepository.save(location);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, getHeaderParam(location)))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, getHeaderParam(result)))
             .body(result);
     }
 
