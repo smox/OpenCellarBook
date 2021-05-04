@@ -4,9 +4,15 @@ import { connect } from 'react-redux';
 import { Button, Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  getEntitiesWithPossiblePropertyTypes() as getMeasureTypes,
+  getEntities as getMeasureTypes,
   deleteEntity as deleteMeasureType } from 'app/entities/measure-type/measure-type.reducer';
+
+import {
+  getEntities as getPossiblePTypesForMTypes
+} from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
+
 import { Link } from 'react-router-dom';
+import {IPossiblePTypesForMTypes} from "app/shared/model/possible-p-types-for-m-types.model";
 
 export interface ISettingsMeasureTypesListProp extends StateProps, DispatchProps {}
 
@@ -16,6 +22,7 @@ export const SettingsMeasureTypesList = (props: ISettingsMeasureTypesListProp) =
 
   useEffect(() => {
     props.getMeasureTypes();
+    props.getPossiblePTypesForMTypes();
   }, []);
 
   return (
@@ -57,7 +64,11 @@ export const SettingsMeasureTypesList = (props: ISettingsMeasureTypesListProp) =
                   <td>{ measureType.orderNumber ? measureType.orderNumber : translate('global.messages.info.orderNumber.notFound') }</td>
                   <td>{ measureType.name }</td>
                   <td>{ translate(`openCellarBookApp.FillingEffect.${measureType.fillingEffect}`) }</td>
-                  <td>{ measureType.possiblePTypesForMTypes?.join(', ') }</td>
+                  <td>{ possiblePTypesForMTypes
+                    .filter((pptfmt: IPossiblePTypesForMTypes) => pptfmt.measureType?.id === measureType.id)
+                    .map((pptfmt: IPossiblePTypesForMTypes) => pptfmt.measurePropertyType.type )
+                    .join(', ')
+                  }</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/settings/measure-type/edit/${measureType.id}`} color="primary" size="sm">
@@ -94,11 +105,13 @@ const mapStateToProps = storeState => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
   measureTypes: storeState.measureType.entities,
+  possiblePTypesForMTypes: storeState.possiblePTypesForMTypes.entities,
   loading: storeState.measureType.loading
 });
 
 const mapDispatchToProps = {
   getMeasureTypes,
+  getPossiblePTypesForMTypes,
   deleteMeasureType
 };
 

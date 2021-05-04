@@ -105,11 +105,6 @@ export const getEntities: ICrudGetAllAction<IMeasurePropertyType> = (page, size,
   payload: axios.get<IMeasurePropertyType>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
 });
 
-export const getEntitiesByMeasureTypes: ICrudSearchAction<IMeasurePropertyType> = (search, page, size, sort) => ({
-  type: ACTION_TYPES.FETCH_MEASURE_PROPERTY_TYPE_LIST,
-  payload: axios.get<IMeasurePropertyType>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
-});
-
 export const getEntity: ICrudGetAction<IMeasurePropertyType> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {

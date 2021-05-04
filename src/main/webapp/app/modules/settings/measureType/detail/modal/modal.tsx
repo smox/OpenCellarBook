@@ -13,6 +13,10 @@ import {
 import {
   getEntities as getPropertyTypes } from 'app/entities/measure-property-type/measure-property-type.reducer';
 
+import {
+  getEntities as getPossiblePTypesForMTypes
+} from 'app/entities/possible-p-types-for-m-types/possible-p-types-for-m-types.reducer';
+
 import { RouteComponentProps } from 'react-router-dom';
 import {FillingEffect} from "app/shared/model/enumerations/filling-effect.model";
 import {IRootState} from "app/shared/reducers";
@@ -22,7 +26,7 @@ export interface ISettingsMeasureTypeDetailModalProps extends StateProps, Dispat
 
 const SettingsMeasureTypeDetailModal = (props: ISettingsMeasureTypeDetailModalProps) => {
 
-    const { entities, entity, loading, propertyTypes } = props;
+    const { entities, entity, loading, propertyTypes, possiblePTypesForMTypes } = props;
     const id = props.match.params?.id;
     const isNew = !id;
 
@@ -40,7 +44,9 @@ const SettingsMeasureTypeDetailModal = (props: ISettingsMeasureTypeDetailModalPr
 
     useEffect(() => {
       props.getPropertyTypes();
+      props.getPossiblePTypesForMTypes();
     },[]);
+
 
     const defaultValues = isNew ? { } : {
       id: entity.id,
@@ -115,6 +121,7 @@ const mapStateToProps = (storeState: IRootState) => ({
     entity: storeState.measureType.entity,
     entities: storeState.measureType.entities,
     propertyTypes: storeState.measurePropertyType.entities,
+    possiblePTypesForMTypes: storeState.possiblePTypesForMTypes.entities,
     loading: storeState.measureType.loading,
   });
 
@@ -123,7 +130,8 @@ const mapStateToProps = (storeState: IRootState) => ({
     setMeasureType,
     createMeasureType,
     updateMeasureType,
-    getPropertyTypes
+    getPropertyTypes,
+    getPossiblePTypesForMTypes
   };
 
   type StateProps = ReturnType<typeof mapStateToProps>;

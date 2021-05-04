@@ -4,6 +4,7 @@
       "home": {
         "title": "Maßnahmen",
         "createLabel": "Maßnahme erstellen",
+        "editLabel": "Maßnahme bearbeiten",
         "createOrEditLabel": "Maßnahme erstellen oder bearbeiten",
         "notFound": "Keine Maßnahmen gefunden"
       },
